@@ -1,0 +1,8 @@
+PASS: Seeded role authentication and invalid password rejection
+PASS: Required-field validation
+PASS: Sequential references and trimmed submission
+PASS: Reference tracking and missing-reference response
+PASS: Combined category/status filtering
+PASS: Status/category/notes update and missing-reference response
+PASS: JSON persistence and fresh-service reload
+All 7 backend smoke checks passed using isolated temporary data.

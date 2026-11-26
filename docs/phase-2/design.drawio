@@ -1,0 +1,579 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="01 / Three-tier architecture" id="01-architecture">
+    <mxGraphModel pageWidth="1200" pageHeight="900" page="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="01 / Three-tier architecture" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=25;" vertex="1" parent="1">
+          <mxGeometry y="20" width="1130" as="geometry" height="40" x="35" />
+        </mxCell>
+        <mxCell id="n3" value="Complaint and Feedback Management System | Phase 2 review baseline | 26 November 2026" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="65" width="1130" as="geometry" height="30" x="35" />
+        </mxCell>
+        <mxCell id="n4" value="PRESENTATION | Forms/&#xA;LoginForm / CustomerForm / AgentForm&#xA;Optional: AdminSummaryForm&#xA;Input, dropdowns, validation alerts, confirmation messages, ticket grids" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="130" width="860" as="geometry" height="140" x="170" />
+        </mxCell>
+        <mxCell id="n5" edge="1" parent="1" style="endArrow=open;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="270" as="sourcePoint" />
+            <mxPoint x="600" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n6" value="BUSINESS LOGIC | Services/ComplaintService&#xA;Authenticate; validate title and description; generate references&#xA;Submit and track complaints; filter category/status; update category/status/notes" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="330" width="860" as="geometry" height="130" x="170" />
+        </mxCell>
+        <mxCell id="n7" edge="1" parent="1" style="endArrow=open;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="460" as="sourcePoint" />
+            <mxPoint x="600" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n8" value="DATA ACCESS &amp; DOMAIN | Data/ and Models/&#xA;StorageService / User / Complaint / Enums&#xA;JSON serialization and deserialization; SHA-256 password hashing" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="520" width="860" as="geometry" height="130" x="170" />
+        </mxCell>
+        <mxCell id="n9" edge="1" parent="1" style="endArrow=open;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="650" as="sourcePoint" />
+            <mxPoint x="600" y="710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n10" value="LOCAL RECORDS&#xA;complaints.json / users.json (process working directory)" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="710" width="580" as="geometry" height="80" x="310" />
+        </mxCell>
+        <mxCell id="n11" value="Arrows show dependencies/calls. Forms also use domain types for binding. Forms do not access JSON directly." style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="810" width="860" as="geometry" height="55" x="170" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="02 / Use cases" id="02-use-cases">
+    <mxGraphModel pageWidth="1500" pageHeight="1240" page="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="02 / Use cases" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=25;" vertex="1" parent="1">
+          <mxGeometry y="20" width="1430" as="geometry" height="40" x="35" />
+        </mxCell>
+        <mxCell id="n3" value="Complaint and Feedback Management System | Phase 2 review baseline | 26 November 2026" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="65" width="1430" as="geometry" height="30" x="35" />
+        </mxCell>
+        <mxCell id="n4" value="" style="fillColor=none;strokeColor=#3F4B5A;" vertex="1" parent="1">
+          <mxGeometry y="120" width="1110" as="geometry" height="1050" x="300" />
+        </mxCell>
+        <mxCell id="n5" value="Complaint and Feedback Management System" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="130" width="650" as="geometry" height="35" x="560" />
+        </mxCell>
+        <mxCell id="n6" value="" style="shape=umlActor;" vertex="1" parent="1">
+          <mxGeometry y="300" width="80" as="geometry" height="105" x="100" />
+        </mxCell>
+        <mxCell id="n7" value="Customer" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="412" width="165" as="geometry" height="45" x="65" />
+        </mxCell>
+        <mxCell id="n8" value="" style="shape=umlActor;" vertex="1" parent="1">
+          <mxGeometry y="610" width="80" as="geometry" height="105" x="100" />
+        </mxCell>
+        <mxCell id="n9" value="Support Agent" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="722" width="165" as="geometry" height="45" x="65" />
+        </mxCell>
+        <mxCell id="n10" value="" style="shape=umlActor;" vertex="1" parent="1">
+          <mxGeometry y="930" width="80" as="geometry" height="105" x="100" />
+        </mxCell>
+        <mxCell id="n11" value="Administrator" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="1042" width="165" as="geometry" height="45" x="65" />
+        </mxCell>
+        <mxCell id="n12" value="Log In" style="ellipse;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="190" width="260" as="geometry" height="60" x="390" />
+        </mxCell>
+        <mxCell id="n13" value="Submit Complaint/Feedback" style="ellipse;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="300" width="300" as="geometry" height="75" x="390" />
+        </mxCell>
+        <mxCell id="n14" value="Receive Reference Number" style="ellipse;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="300" width="310" as="geometry" height="75" x="900" />
+        </mxCell>
+        <mxCell id="n15" value="Track Complaint Status" style="ellipse;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="410" width="300" as="geometry" height="70" x="390" />
+        </mxCell>
+        <mxCell id="n16" value="View &amp; Filter Complaints" style="ellipse;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="530" width="300" as="geometry" height="70" x="390" />
+        </mxCell>
+        <mxCell id="n17" value="Re-categorise Issue" style="ellipse;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="640" width="350" as="geometry" height="70" x="390" />
+        </mxCell>
+        <mxCell id="n18" value="Update Resolution Status &amp; Notes" style="ellipse;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="750" width="420" as="geometry" height="80" x="390" />
+        </mxCell>
+        <mxCell id="n19" value="Manage Agent Accounts" style="ellipse;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="890" width="350" as="geometry" height="70" x="390" />
+        </mxCell>
+        <mxCell id="n20" value="View System Ticket Summary" style="ellipse;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="1000" width="420" as="geometry" height="70" x="390" />
+        </mxCell>
+        <mxCell id="n21" edge="1" parent="1" style="endArrow=none;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="345" as="sourcePoint" />
+            <mxPoint x="390" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n22" edge="1" parent="1" style="endArrow=none;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="345" as="sourcePoint" />
+            <mxPoint x="390" y="337" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n23" edge="1" parent="1" style="endArrow=none;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="345" as="sourcePoint" />
+            <mxPoint x="390" y="445" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n24" edge="1" parent="1" style="endArrow=none;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="655" as="sourcePoint" />
+            <mxPoint x="390" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n25" edge="1" parent="1" style="endArrow=none;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="655" as="sourcePoint" />
+            <mxPoint x="390" y="565" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n26" edge="1" parent="1" style="endArrow=none;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="655" as="sourcePoint" />
+            <mxPoint x="390" y="675" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n27" edge="1" parent="1" style="endArrow=none;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="655" as="sourcePoint" />
+            <mxPoint x="390" y="790" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n28" edge="1" parent="1" style="endArrow=none;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="975" as="sourcePoint" />
+            <mxPoint x="390" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n29" edge="1" parent="1" style="endArrow=none;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="975" as="sourcePoint" />
+            <mxPoint x="390" y="925" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n30" edge="1" parent="1" style="endArrow=none;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="975" as="sourcePoint" />
+            <mxPoint x="390" y="1035" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n31" edge="1" parent="1" style="endArrow=open;dashed=1;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="690" y="337" as="sourcePoint" />
+            <mxPoint x="900" y="337" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n32" value="&lt;&lt;include&gt;&gt;" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="307" width="155" as="geometry" height="25" x="730" />
+        </mxCell>
+        <mxCell id="n33" value="Administrator account management and ticket summary are requirements awaiting implementation/scope decision." style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="1110" width="1000" as="geometry" height="40" x="330" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="03 / Backend class diagram" id="03-classes">
+    <mxGraphModel pageWidth="1600" pageHeight="1180" page="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="03 / Backend class diagram" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=25;" vertex="1" parent="1">
+          <mxGeometry y="20" width="1530" as="geometry" height="40" x="35" />
+        </mxCell>
+        <mxCell id="n3" value="Complaint and Feedback Management System | Phase 2 review baseline | 26 November 2026" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="65" width="1530" as="geometry" height="30" x="35" />
+        </mxCell>
+        <mxCell id="n4" value="User&#xA;--------------------------------------&#xA;+ Id: string&#xA;+ Username: string&#xA;+ PasswordHash: string&#xA;+ Role: UserRole" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="130" width="370" as="geometry" height="200" x="40" />
+        </mxCell>
+        <mxCell id="n5" value="Complaint&#xA;--------------------------------------&#xA;+ ReferenceNumber: string&#xA;+ SubmittedBy: string&#xA;+ Title: string&#xA;+ Category: ComplaintCategory&#xA;+ Description: string&#xA;+ Status: ComplaintStatus&#xA;+ AgentNotes: string&#xA;+ CreatedAt: DateTime&#xA;+ UpdatedAt: DateTime" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="420" width="370" as="geometry" height="310" x="40" />
+        </mxCell>
+        <mxCell id="n6" value="ComplaintService&#xA;-------------------------------------------------------------------&#xA;- _storage: StorageService&#xA;- _complaints: List&lt;Complaint&gt;&#xA;- _users: List&lt;User&gt;&#xA;+ ComplaintService()&#xA;+ Authenticate(username: string, password: string): User?&#xA;+ SubmitComplaint(username: string, title: string,&#xA;    category: ComplaintCategory, description: string): Complaint&#xA;+ TrackByReference(referenceNumber: string): Complaint?&#xA;+ GetAllComplaints(categoryFilter: ComplaintCategory? = null,&#xA;    statusFilter: ComplaintStatus? = null): List&lt;Complaint&gt;&#xA;+ UpdateComplaintStatus(referenceNumber: string,&#xA;    newStatus: ComplaintStatus, newCategory: ComplaintCategory,&#xA;    agentNotes: string): bool" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="130" width="980" as="geometry" height="390" x="510" />
+        </mxCell>
+        <mxCell id="n7" value="StorageService&#xA;-------------------------------------------------------------------&#xA;- _complaintsFile: string&#xA;- _usersFile: string&#xA;+ LoadComplaints(): List&lt;Complaint&gt;&#xA;+ SaveComplaints(complaints: List&lt;Complaint&gt;): void&#xA;+ LoadUsers(): List&lt;User&gt;&#xA;+ SaveUsers(users: List&lt;User&gt;): void&#xA;+ HashPassword(password: string): string {static}" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="650" width="720" as="geometry" height="270" x="620" />
+        </mxCell>
+        <mxCell id="n8" edge="1" parent="1" style="endArrow=open;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="230" as="sourcePoint" />
+            <mxPoint x="410" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n9" value="manages 0..*" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="195" width="105" as="geometry" height="35" x="415" />
+        </mxCell>
+        <mxCell id="n10" edge="1" parent="1" style="endArrow=open;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="470" as="sourcePoint" />
+            <mxPoint x="410" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n11" value="manages 0..*" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="545" width="120" as="geometry" height="35" x="414" />
+        </mxCell>
+        <mxCell id="n12" edge="1" parent="1" style="endArrow=open;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1000" y="520" as="sourcePoint" />
+            <mxPoint x="1000" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n13" value="owns / uses 1" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="565" width="240" as="geometry" height="30" x="1020" />
+        </mxCell>
+        <mxCell id="n14" value="&lt;&lt;enumeration&gt;&gt; UserRole&#xA;Customer / SupportAgent / Admin" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="810" width="390" as="geometry" height="90" x="40" />
+        </mxCell>
+        <mxCell id="n15" value="&lt;&lt;enumeration&gt;&gt; ComplaintCategory&#xA;Billing / Technical / Service / GeneralFeedback" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="940" width="570" as="geometry" height="90" x="40" />
+        </mxCell>
+        <mxCell id="n16" value="&lt;&lt;enumeration&gt;&gt; ComplaintStatus&#xA;Pending / InProgress / Resolved / Closed" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="970" width="640" as="geometry" height="90" x="700" />
+        </mxCell>
+        <mxCell id="n17" value="Public model properties use +. SubmittedBy is a username string. Collection links describe the private lists; no User navigation property exists." style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="1100" width="1470" as="geometry" height="50" x="40" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="04 / Submit and track sequence" id="04-sequence">
+    <mxGraphModel pageWidth="1500" pageHeight="1330" page="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="04 / Submit and track sequence" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=25;" vertex="1" parent="1">
+          <mxGeometry y="20" width="1430" as="geometry" height="40" x="35" />
+        </mxCell>
+        <mxCell id="n3" value="Complaint and Feedback Management System | Phase 2 review baseline | 26 November 2026" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="65" width="1430" as="geometry" height="30" x="35" />
+        </mxCell>
+        <mxCell id="n4" value="Customer" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="130" width="165" as="geometry" height="55" x="20" />
+        </mxCell>
+        <mxCell id="n5" edge="1" parent="1" style="endArrow=none;dashed=1;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="185" as="sourcePoint" />
+            <mxPoint x="100" y="1230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n6" value="CustomerForm" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="130" width="165" as="geometry" height="55" x="320" />
+        </mxCell>
+        <mxCell id="n7" edge="1" parent="1" style="endArrow=none;dashed=1;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="185" as="sourcePoint" />
+            <mxPoint x="400" y="1230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n8" value="ComplaintService" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="130" width="165" as="geometry" height="55" x="770" />
+        </mxCell>
+        <mxCell id="n9" edge="1" parent="1" style="endArrow=none;dashed=1;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="850" y="185" as="sourcePoint" />
+            <mxPoint x="850" y="1230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n10" value="StorageService" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="130" width="165" as="geometry" height="55" x="1240" />
+        </mxCell>
+        <mxCell id="n11" edge="1" parent="1" style="endArrow=none;dashed=1;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1320" y="185" as="sourcePoint" />
+            <mxPoint x="1320" y="1230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n12" edge="1" parent="1" style="endArrow=open;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="245" as="sourcePoint" />
+            <mxPoint x="400" y="245" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n13" value="Enter title/category/description; click Submit" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="210" width="280" as="geometry" height="34" x="112" />
+        </mxCell>
+        <mxCell id="n14" edge="1" parent="1" style="endArrow=open;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="335" as="sourcePoint" />
+            <mxPoint x="850" y="335" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n15" value="SubmitComplaint(user.Username, title, category, desc)" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="300" width="430" as="geometry" height="34" x="412" />
+        </mxCell>
+        <mxCell id="n16" value="Validate title/description&#xA;Generate CMP-{year}-{Count + 1:D4}&#xA;Create Complaint; append to cached list" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="370" width="490" as="geometry" height="95" x="750" />
+        </mxCell>
+        <mxCell id="n17" edge="1" parent="1" style="endArrow=open;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="850" y="535" as="sourcePoint" />
+            <mxPoint x="1320" y="535" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n18" value="SaveComplaints(_complaints)" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="500" width="450" as="geometry" height="34" x="862" />
+        </mxCell>
+        <mxCell id="n19" value="Serialize and write&#xA;complaints.json" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="570" width="255" as="geometry" height="75" x="1200" />
+        </mxCell>
+        <mxCell id="n20" edge="1" parent="1" style="endArrow=open;dashed=1;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1320" y="685" as="sourcePoint" />
+            <mxPoint x="850" y="685" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n21" value="Save completes" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="650" width="450" as="geometry" height="34" x="862" />
+        </mxCell>
+        <mxCell id="n22" edge="1" parent="1" style="endArrow=open;dashed=1;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="850" y="755" as="sourcePoint" />
+            <mxPoint x="400" y="755" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n23" value="Return new Complaint" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="720" width="430" as="geometry" height="34" x="412" />
+        </mxCell>
+        <mxCell id="n24" edge="1" parent="1" style="endArrow=open;dashed=1;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="825" as="sourcePoint" />
+            <mxPoint x="100" y="825" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n25" value="Confirmation popup + lblGeneratedRef" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="790" width="280" as="geometry" height="34" x="112" />
+        </mxCell>
+        <mxCell id="n26" edge="1" parent="1" style="endArrow=open;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="915" as="sourcePoint" />
+            <mxPoint x="400" y="915" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n27" value="Enter reference; click Search" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="880" width="280" as="geometry" height="34" x="112" />
+        </mxCell>
+        <mxCell id="n28" edge="1" parent="1" style="endArrow=open;dashed=0;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="985" as="sourcePoint" />
+            <mxPoint x="850" y="985" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n29" value="TrackByReference(referenceNumber)" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="950" width="430" as="geometry" height="34" x="412" />
+        </mxCell>
+        <mxCell id="n30" edge="1" parent="1" style="endArrow=open;dashed=1;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="850" y="1055" as="sourcePoint" />
+            <mxPoint x="400" y="1055" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n31" value="Complaint? (lookup in cached list)" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="1020" width="430" as="geometry" height="34" x="412" />
+        </mxCell>
+        <mxCell id="n32" edge="1" parent="1" style="endArrow=open;dashed=1;html=0;strokeColor=#3F4B5A;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="1125" as="sourcePoint" />
+            <mxPoint x="100" y="1125" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n33" value="Display Status, Category, UpdatedAt, AgentNotes" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="1090" width="280" as="geometry" height="34" x="112" />
+        </mxCell>
+        <mxCell id="n34" value="Alternatives: missing fields -&gt; ArgumentException; JSON/file failure -&gt; exception; missing reference -&gt; null. UI shows an alert/no-match message. Success confirmation requires a successful save. Failed saves can leave cached changes in memory." style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="1240" width="1200" as="geometry" height="75" x="160" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="05 / LoginForm wireframe" id="05-login">
+    <mxGraphModel pageWidth="1000" pageHeight="760" page="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="05 / LoginForm wireframe" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=25;" vertex="1" parent="1">
+          <mxGeometry y="20" width="930" as="geometry" height="40" x="35" />
+        </mxCell>
+        <mxCell id="n3" value="Complaint and Feedback Management System | Phase 2 review baseline | 26 November 2026" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="65" width="930" as="geometry" height="30" x="35" />
+        </mxCell>
+        <mxCell id="n4" value="Complaint Management System - Login" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="140" width="660" as="geometry" height="490" x="170" />
+        </mxCell>
+        <mxCell id="n5" value="Username" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="225" width="200" as="geometry" height="25" x="230" />
+        </mxCell>
+        <mxCell id="n6" value="txtUsername [TextBox]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="260" width="540" as="geometry" height="55" x="230" />
+        </mxCell>
+        <mxCell id="n7" value="Password" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="340" width="200" as="geometry" height="25" x="230" />
+        </mxCell>
+        <mxCell id="n8" value="txtPassword [UseSystemPasswordChar = true]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="375" width="540" as="geometry" height="55" x="230" />
+        </mxCell>
+        <mxCell id="n9" value="btnLogin | Log In" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="475" width="200" as="geometry" height="55" x="570" />
+        </mxCell>
+        <mxCell id="n10" value="Authenticate -&gt; Customer: CustomerForm; SupportAgent / Admin: AgentForm. Invalid credentials: alert and remain here." style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="660" width="660" as="geometry" height="65" x="170" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="06 / CustomerForm - Submit tab" id="06-customer-submit">
+    <mxGraphModel pageWidth="1150" pageHeight="900" page="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="06 / CustomerForm - Submit tab" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=25;" vertex="1" parent="1">
+          <mxGeometry y="20" width="1080" as="geometry" height="40" x="35" />
+        </mxCell>
+        <mxCell id="n3" value="Complaint and Feedback Management System | Phase 2 review baseline | 26 November 2026" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="65" width="1080" as="geometry" height="30" x="35" />
+        </mxCell>
+        <mxCell id="n4" value="CustomerForm" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="120" width="1030" as="geometry" height="670" x="60" />
+        </mxCell>
+        <mxCell id="n5" value="Submit Complaint [active tab]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="180" width="390" as="geometry" height="50" x="90" />
+        </mxCell>
+        <mxCell id="n6" value="Track Status" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="180" width="260" as="geometry" height="50" x="480" />
+        </mxCell>
+        <mxCell id="n7" value="Title" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="270" width="150" as="geometry" height="25" x="110" />
+        </mxCell>
+        <mxCell id="n8" value="txtTitle" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="305" width="930" as="geometry" height="50" x="110" />
+        </mxCell>
+        <mxCell id="n9" value="Category" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="385" width="180" as="geometry" height="25" x="110" />
+        </mxCell>
+        <mxCell id="n10" value="cmbCategory [ComplaintCategory dropdown]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="420" width="540" as="geometry" height="50" x="110" />
+        </mxCell>
+        <mxCell id="n11" value="Description" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="500" width="180" as="geometry" height="25" x="110" />
+        </mxCell>
+        <mxCell id="n12" value="txtDescription&#xA;[Multiline TextBox]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="535" width="930" as="geometry" height="120" x="110" />
+        </mxCell>
+        <mxCell id="n13" value="btnSubmit | Submit" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="685" width="240" as="geometry" height="55" x="800" />
+        </mxCell>
+        <mxCell id="n14" value="lblGeneratedRef [returned reference after successful save]" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="700" width="650" as="geometry" height="40" x="110" />
+        </mxCell>
+        <mxCell id="n15" value="Success: confirmation popup containing the reference. Required fields and persistence errors: validation alert." style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="820" width="1030" as="geometry" height="55" x="60" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="07 / CustomerForm - Track tab" id="07-customer-track">
+    <mxGraphModel pageWidth="1150" pageHeight="900" page="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="07 / CustomerForm - Track tab" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=25;" vertex="1" parent="1">
+          <mxGeometry y="20" width="1080" as="geometry" height="40" x="35" />
+        </mxCell>
+        <mxCell id="n3" value="Complaint and Feedback Management System | Phase 2 review baseline | 26 November 2026" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="65" width="1080" as="geometry" height="30" x="35" />
+        </mxCell>
+        <mxCell id="n4" value="CustomerForm" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="120" width="1030" as="geometry" height="670" x="60" />
+        </mxCell>
+        <mxCell id="n5" value="Submit Complaint" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="180" width="390" as="geometry" height="50" x="90" />
+        </mxCell>
+        <mxCell id="n6" value="Track Status [active tab]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="180" width="360" as="geometry" height="50" x="480" />
+        </mxCell>
+        <mxCell id="n7" value="txtSearchRef [reference number]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="275" width="660" as="geometry" height="55" x="110" />
+        </mxCell>
+        <mxCell id="n8" value="btnSearch | Search" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="275" width="240" as="geometry" height="55" x="800" />
+        </mxCell>
+        <mxCell id="n9" value="Status: lblTrackedStatus [read-only]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="385" width="930" as="geometry" height="55" x="110" />
+        </mxCell>
+        <mxCell id="n10" value="Category: lblTrackedCategory [read-only]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="460" width="930" as="geometry" height="55" x="110" />
+        </mxCell>
+        <mxCell id="n11" value="UpdatedAt: lblTrackedUpdatedAt [read-only]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="535" width="930" as="geometry" height="55" x="110" />
+        </mxCell>
+        <mxCell id="n12" value="AgentNotes: txtTrackedAgentNotes&#xA;[ReadOnly = true; Multiline = true]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="610" width="930" as="geometry" height="110" x="110" />
+        </mxCell>
+        <mxCell id="n13" value="Blank reference: validation alert. No match: clear previous results and show a not-found message." style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="820" width="1030" as="geometry" height="55" x="60" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="08 / AgentForm wireframe" id="08-agent">
+    <mxGraphModel pageWidth="1550" pageHeight="1050" page="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="08 / AgentForm wireframe" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=25;" vertex="1" parent="1">
+          <mxGeometry y="20" width="1480" as="geometry" height="40" x="35" />
+        </mxCell>
+        <mxCell id="n3" value="Complaint and Feedback Management System | Phase 2 review baseline | 26 November 2026" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry y="65" width="1480" as="geometry" height="30" x="35" />
+        </mxCell>
+        <mxCell id="n4" value="AgentForm | Support Agent / Administrator" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="120" width="1460" as="geometry" height="800" x="45" />
+        </mxCell>
+        <mxCell id="n5" value="cmbFilterCategory [All / enum]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="180" width="420" as="geometry" height="50" x="75" />
+        </mxCell>
+        <mxCell id="n6" value="cmbFilterStatus [All / enum]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="180" width="420" as="geometry" height="50" x="515" />
+        </mxCell>
+        <mxCell id="n7" value="btnFilter" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="180" width="190" as="geometry" height="50" x="960" />
+        </mxCell>
+        <mxCell id="n8" value="btnRefresh" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="180" width="230" as="geometry" height="50" x="1170" />
+        </mxCell>
+        <mxCell id="n9" value="dgvComplaints [read-only; full-row single selection]&#xA;&#xA;ReferenceNumber     | Title            | Category       | Status         | SubmittedBy      | CreatedAt&#xA;--------------------------------------------------------------------------------------------------------------&#xA;[Complaint records from GetAllComplaints; explicit bound columns]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="280" width="1380" as="geometry" height="290" x="75" />
+        </mxCell>
+        <mxCell id="n10" value="Selected complaint" style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="610" width="350" as="geometry" height="30" x="75" />
+        </mxCell>
+        <mxCell id="n11" value="cmbUpdateStatus [ComplaintStatus]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="655" width="440" as="geometry" height="50" x="75" />
+        </mxCell>
+        <mxCell id="n12" value="cmbUpdateCategory [ComplaintCategory]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="655" width="550" as="geometry" height="50" x="540" />
+        </mxCell>
+        <mxCell id="n13" value="txtAgentNotes&#xA;[Multiline TextBox]" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="735" width="1015" as="geometry" height="120" x="75" />
+        </mxCell>
+        <mxCell id="n14" value="btnSaveUpdate" style="html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=12;fillColor=#F1F5F9;strokeColor=#3F4B5A;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="790" width="325" as="geometry" height="60" x="1130" />
+        </mxCell>
+        <mxCell id="n15" value="Save disabled without selection. Populate action controls from the selected row; update by ReferenceNumber. Refresh clears filters. Admin account management and summary screens remain undecided scope." style="text;html=0;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Arial;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry y="950" width="1460" as="geometry" height="70" x="45" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
