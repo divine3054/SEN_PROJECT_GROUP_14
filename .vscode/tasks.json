@@ -2,14 +2,32 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"type": "Live Preview",
-			"workspacePath": "c:\\Users\\tari4\\OneDrive\\Desktop\\SEN_PROJECT_GROUP_14",
-			"problemMatcher": [],
-			"label": "Live Preview: Run Server",
+			"type": "process",
+			"command": "powershell.exe",
+			"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/Run-Project.ps1", "-Action", "Build"],
+			"options": { "cwd": "${workspaceFolder}" },
+			"problemMatcher": "$msCompile",
+			"label": "C#: Build ComplaintManagementSystem",
 			"group": {
 				"kind": "build",
 				"isDefault": true
 			}
+		},
+		{
+			"type": "process",
+			"command": "powershell.exe",
+			"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/Run-Project.ps1", "-Action", "Run"],
+			"options": { "cwd": "${workspaceFolder}" },
+			"problemMatcher": "$msCompile",
+			"label": "C#: Run ComplaintManagementSystem"
+		},
+		{
+			"type": "process",
+			"command": "powershell.exe",
+			"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/Run-Project.ps1", "-Action", "UiCheck"],
+			"options": { "cwd": "${workspaceFolder}" },
+			"problemMatcher": "$msCompile",
+			"label": "C#: Check Member 1 UI"
 		}
 	]
 }
