@@ -5,3 +5,14 @@
 *.suo
 .tools/
 **/TestResults/
+complaints.json
+complaints.json.bak
+complaints.json.corrupt-*
+complaints.json.*.tmp
+users.json
+users.json.bak
+users.json.corrupt-*
+users.json.*.tmp
+reference-sequence.json
+reference-sequence.json.bak
+reference-sequence.json.*.tmp

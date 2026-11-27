@@ -53,7 +53,7 @@ Theory cases run once per listed input; their test identifiers appear in the gen
 - **STORE03 / FR-08, NFR-06:** Missing users.json followed by reload -> exactly three persisted demo accounts with stable IDs and no plaintext password in JSON.
 - **STORE04 / FR-08:** Save one explicitly supplied agent account -> subsequent load returns that account without reseeding defaults.
 - **UNIT01 / NFR-06:** Hash the known UTF-8 string abc -> expected SHA-256 digest encoded as Base64. This is an isolated unit test.
-- **STORE05 / NFR-02:** Malformed complaints.json -> JsonException and source file preserved. This records the storage contract; graceful application recovery is still missing.
+- **STORE05 / NFR-02:** Malformed complaints.json -> JsonException and source preserved. REL-13 through REL-18 check invalid/missing data and explicit validated recovery; UI-07/12 check failed-save feedback. Human startup/recovery verification remains separate.
 
 Most service/storage cases are integration tests because they combine business logic, serialization and the filesystem. Do not describe them all as isolated unit tests.
 
@@ -78,12 +78,17 @@ A team reviewer acting as a Customer and another as a Support Agent must walk th
 
 The issues below are separated by the evidence that supports them: code inspection, exploratory UI observations, or outstanding team decisions.
 
-- QA-01 (Member 2/Member 1): failed saves can leave cached changes; corrupt JSON/startup or agent-save errors lack graceful UI handling.
-- QA-02 (Member 1): UI check confirmed blank tracking input has no dedicated validation alert and the submit confirmation popup is absent.
-- QA-03 (Member 1): UI check confirmed the grid exposes all complaint properties rather than the six planned columns; single-selection, disabled-save and multiline-notes behavior still needs reconciliation with the wireframe.
+- QA-01: **Fixed in the integrated working tree; automated checks pass.** Member 2 publishes cached changes only after successful atomic saves and provides explicit recovery. Member 1 displays startup/save errors. Human MAN-07 confirmation remains pending.
+- QA-02: **Fixed in the integrated working tree.** Submission confirmation and blank-reference alerts are implemented. The final stale-reference defect is corrected during integration review and covered by UI-14.
+- QA-03: **Fixed in Member 1's integrated branch.** Six read-only grid columns, single selection, disabled editing without a selected row and multiline notes are covered by UI checks.
 - QA-04 (team): decide whether to retain or defer administrator account management/summary use cases from the earlier design.
 - QA-05 (Member 3/team): draft [activity diagram](../phase-2/ACTIVITY-DIAGRAM.md) and [feasibility/schedule/risk material](../phase-2/FEASIBILITY-SCHEDULE-RISKS.md) are prepared. Human-captured screenshots, video, stakeholder acceptance and assembled report remain outstanding.
 
 Exit criteria: automated cases pass; required manual and acceptance cases have actual results; core defects are fixed/retested or explicitly accepted with limitations; final report links are viewable; team approval is recorded with real names and dates.
 
 Framework references: [Microsoft xUnit tutorial](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-csharp-with-xunit), [xUnit parallel execution](https://xunit.net/docs/running-tests-in-parallel).
+
+
+## 7. Integrated review - 27 November 2026
+
+The section 4 exploratory observations describe the older UI and are retained as historical evidence. Fresh integrated results and current-host grid/filter/tracking measurements are in [INTEGRATION_REVIEW.md](../INTEGRATION_REVIEW.md). UI-15 exercises the cross-role workflow with reopened services; UI-16 measures native controls with 1,000 records. These do not establish stakeholder acceptance or a human recording. Repeat the final walkthrough on the designated demonstration PC and retain real tester/date/evidence references.

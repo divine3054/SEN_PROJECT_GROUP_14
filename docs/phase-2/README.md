@@ -4,7 +4,7 @@ Prepared: 26 November 2026 (Africa/Lagos). Model: Waterfall.
 
 **Member 3 approved Phase 2 and explicitly authorized Phase 3 on 27 November 2026. Wider team review and unresolved scope decisions remain pending.**
 
-Open [design.drawio](design.drawio) in diagrams.net/draw.io. Its eight editable pages have matching 2x-resolution PNGs in [exports](exports/). Use these exports in the PDF report. Recreate both formats with `powershell -File docs/phase-2/Generate-Design.ps1` from the repository root (script execution must be permitted by the local PowerShell policy). No application source changes are part of this design pack.
+Open [design.drawio](design.drawio) in diagrams.net/draw.io. Its nine editable pages have matching 2x-resolution PNGs in [exports](exports/), including the activity flow. Class and sequence pages reflect the integrated backend's reference counter and atomic saves. Use these exports in the PDF report. Recreate them with `powershell -File docs/phase-2/Generate-Design.ps1` from the repository root (script execution must be permitted by local PowerShell policy).
 
 The complaint-lifecycle [activity diagram](ACTIVITY-DIAGRAM.md) and [feasibility, schedule and risk draft](FEASIBILITY-SCHEDULE-RISKS.md) are separate review documents. They are proposed material, not team-approved decisions.
 
@@ -16,7 +16,7 @@ Presentation (`Forms/`) depends on business logic (`Services/`), which depends o
 - Business logic: ComplaintService authenticates credentials, validates required title/description, creates references, filters and tracks tickets, and updates status/category/notes.
 - Data access and domain: User, Complaint, UserRole, ComplaintCategory, ComplaintStatus, StorageService. Records are serialized to `complaints.json` and `users.json` relative to the process working directory. Password hashes use SHA-256 and Base64 encoding, matching the supplied code.
 
-Create one ComplaintService instance for a running application and pass it to forms. Separate instances cache separate lists and can overwrite each other's changes. This is a Phase 3 implementation requirement; existing form placeholders do not yet use services.
+Program now passes one shared ComplaintService between the implemented forms. Each service retains a read snapshot; writes reload the persistent list under a directory-scoped in-process lock before saving, so separate instances in that process do not overwrite newer committed tickets. Concurrent application processes are outside the supported baseline.
 
 ## 2. UML conventions and code alignment
 
@@ -24,7 +24,7 @@ The use case boundary is **Complaint and Feedback Management System**. Customer,
 
 The class diagram uses `+` for public members and `-` for private fields. The supplied model properties are public C# properties, so they use `+`, correcting the private markers in the proposed blueprint. HashPassword is static. ComplaintService owns its StorageService instance and manages User and Complaint collections. Complaint.SubmittedBy stores a username string; the code contains no User object navigation property or enforced foreign key.
 
-The sequence page covers both submission and tracking, including missing-field, storage-failure and reference-not-found paths. On successful submission, SaveComplaints finishes before the service returns the new Complaint. A save failure can leave the cached list changed even though no success response was returned; see review decisions below.
+The sequence page covers submission and tracking, with validation, save-failure and reference-not-found outcomes. The counter is reserved before persistence; SaveComplaints completes before the cache is published and a Complaint copy is returned. Failed saves preserve the earlier cache and primary; a reserved suffix can leave a gap.
 
 ## 3. Screen contract for Member 1
 
@@ -58,18 +58,18 @@ Use a TabControl with Submit Complaint and Track Status tabs (a two-panel layout
 
 1. **Administrator scope:** Manage Agent Accounts and View System Ticket Summary appear in the requested use cases. No account-management or summary service methods exist. Approve adding them in implementation or explicitly defer these requirements. Routing admins to AgentForm alone does not fulfill them.
 2. **Status policy:** UpdateComplaintStatus directly assigns any supplied status/category and does not validate actor permissions or transition order. Decide whether unrestricted enum-to-enum updates are accepted, or specify and implement allowed transitions and role enforcement.
-3. **Reference policy:** The actual format is `CMP-{current year}-{Count + 1:D4}`; CMP-2026-0001 is an example for 2026, not a fixed-year constant. It is sequential only while the single cached list remains intact. Deletion, concurrent instances and external file edits can cause duplicate references. Accept the single-process/no-deletion assumption or require a durable sequence.
-4. **Persistence failures:** JSON parse and file errors propagate to callers. Submissions/status updates mutate cached records before saving, with no rollback. Define and implement the desired recovery behavior before relying on retry after a failed save.
+3. **Reference policy implemented locally:** The per-year reference-sequence.json counter reserves above its saved watermark and the highest existing reference. It prevents reuse after deletion while retained; failed saves may leave gaps. One application process per data directory is supported.
+4. **Persistence handling implemented locally:** Writes use flushed temporary files, atomic replacement and previous-version backups. Cached changes publish only after success. Invalid data is preserved; explicit recovery retains the displaced primary. See Member 2's handoff and the integration review.
 5. **Authentication and access:** The supplied implementation seeds demonstration accounts and uses unsalted SHA-256 hashes. It has no registration, account-management, role authorization or customer-ownership checks in service methods. Tracking uses reference alone. Record whether this matches the classroom demonstration scope; extra access requirements need implementation work.
-6. **Build validation completed:** The project targets net10.0-windows. A workspace-local .NET SDK 10.0.404 was installed for verification. Release solution build succeeded with zero warnings and zero errors; see [build output](BUILD-VERIFICATION.txt). Seven isolated backend smoke checks passed; see [smoke output](BACKEND-SMOKE-VERIFICATION.txt). These are command-line results, not a claim of observing Visual Studio's Output window. No Phase 3 UI behavior was tested.
+6. **Build validation completed:** The project targets net10.0-windows. The older Phase 2 build/smoke files remain historical evidence. The latest integrated solution builds with zero warnings/errors and passes 34 backend tests, 20 reliability checks and 18 native UI checks. See [integration review](../INTEGRATION_REVIEW.md) for fresh results, current-host measurements and evidence limits. Human acceptance is still separate.
 
 ## 5. Phase 2 sign-off checklist
 
 - [x] Architecture, use case, class, sequence diagrams and screen wireframes prepared as editable draw.io pages and high-resolution PNG exports.
-- [ ] Wider team reviews the eight pages and resolves the backend review decisions above.
+- [ ] Wider team reviews the nine pages and resolves the remaining scope decisions above.
 - [x] All five backend files committed and pushed to GitHub: `bfb18e46acfd88eae3dbd34b649cd214ef31eff9`. GitHub's commit/tree API confirmed their remote paths and blob hashes. The repository page was opened in the user's browser. See [recovery evidence](RECOVERY-VERIFICATION.md).
 - [x] Release build and backend smoke checks completed (authentication, submit/persist/reload, track, filter, update).
-- [ ] Member 3 signs the [project log](PROJECT_LOG.md), recording approval date, reviewers and accepted scope decisions.
-- [ ] Advance to Phase 3 only after the required approvals are recorded.
+- [x] Member 3 approval and Phase 3 authorization recorded on 27 November 2026 in PROJECT_LOG.md. Wider team scope approval remains pending.
+- [ ] Complete wider team review and scope decisions before final acceptance. UI implementation and latest QA are integrated locally.
 
 Five backend files: Models/Enums.cs, Models/User.cs, Models/Complaint.cs, Data/StorageService.cs, Services/ComplaintService.cs.

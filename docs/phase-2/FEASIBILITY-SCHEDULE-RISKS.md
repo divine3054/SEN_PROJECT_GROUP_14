@@ -9,7 +9,7 @@ This draft reflects the current Windows Forms/.NET 10 implementation and the pro
 
 | Area | Assessment | Constraints and actions |
 |---|---|---|
-| Technical | Feasible for a classroom desktop demonstration. The solution builds with the .NET 10 SDK and the backend has an xUnit test project. The app uses WinForms and JSON files. | Windows-only UI; one local application instance is assumed. There is no database server, synchronization, multi-user locking, or backup/recovery workflow. Unsalted SHA-256 is demonstration-only and not suitable for production authentication. |
+| Technical | Feasible for a classroom desktop demonstration. The solution builds with the .NET 10 SDK and the backend has an xUnit test project. The app uses WinForms and JSON files. | Windows-only UI; one local application instance is assumed. There is no database server or cross-process synchronization. The integrated backend has atomic saves, previous-version backups, explicit recovery and a per-process directory lock. Unsalted SHA-256 is demonstration-only and not suitable for production authentication. |
 | Operational | The Customer and Support Agent workflows are understandable and have been exercised through the local UI. A single operator can run the app without network access after dependencies are restored. | Users need a Windows computer and a writable working directory. Team members must agree on role scope, status policy, data handling, and how demonstration JSON files are backed up/reset. Manual acceptance remains incomplete. |
 | Economic | The selected stack and JSON storage introduce no application hosting or database-service cost for the stated local demonstration. | No labour rate, hardware budget, licensing analysis, or cost of support was supplied. No monetary total is asserted. |
 | Schedule | A short, dependency-ordered completion sequence is plausible if the team is available. See the proposed work packages below. | Dates and durations are indicative working-day estimates only. The course deadline, team capacity, and time for lecturer feedback are unknown. Scope decisions or UI/backend defects can extend the estimate. |
@@ -58,3 +58,8 @@ Likelihood and impact are preliminary qualitative ratings, not measured probabil
 - A reviewed final report and a working, viewable demo link.
 
 No phase approval, budget approval, team consensus, or personal commitment is inferred by this draft.
+
+
+## 5. Integration update - 27 November 2026
+
+The earlier risk ratings and schedule remain proposed. In the integrated working tree, Member 1's UI fixes and Member 2's cache-safe atomic saves, explicit recovery and persisted counter mitigate R-02/R-03/R-07. One app process per data directory remains required. Fresh results and current-host UI measurements are in ../INTEGRATION_REVIEW.md. Final target-PC testing, acceptance, team scope decisions, a confirmed deadline and submission deliverables remain open.

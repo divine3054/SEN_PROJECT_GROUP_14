@@ -31,7 +31,7 @@ function Page($name, $slug, $width, $height) {
     foreach ($id in @('0','1')) { $cell = $doc.CreateElement('mxCell'); $cell.SetAttribute('id',$id); if ($id -eq '1') {$cell.SetAttribute('parent','0')}; [void]$root.AppendChild($cell) }
     $script:counter = 1
     Text $name 35 20 ($width-70) 40 $heading
-    Text 'Complaint and Feedback Management System | Phase 2 review baseline | 26 November 2026' 35 65 ($width-70) 30 $small
+    Text 'Complaint and Feedback Management System | Phase 2 review baseline | 27 November 2026' 35 65 ($width-70) 30 $small
 }
 function Vertex($text,$x,$y,$w,$h,$style) {
     $script:counter++
@@ -92,7 +92,7 @@ Box "BUSINESS LOGIC | Services/ComplaintService`nAuthenticate; validate title an
 Line 600 460 600 520
 Box "DATA ACCESS & DOMAIN | Data/ and Models/`nStorageService / User / Complaint / Enums`nJSON serialization and deserialization; SHA-256 password hashing" 170 520 860 130
 Line 600 650 600 710
-Box "LOCAL RECORDS`ncomplaints.json / users.json (process working directory)" 310 710 580 80
+Box "LOCAL RECORDS`ncomplaints.json / users.json / reference-sequence.json" 310 710 580 80
 Text 'Arrows show dependencies/calls. Forms also use domain types for binding. Forms do not access JSON directly.' 170 810 860 55
 SavePage
 
@@ -120,38 +120,42 @@ Line 690 337 900 337 $true $true; Text '<<include>>' 730 307 155 25
 Text 'Administrator account management and ticket summary are requirements awaiting implementation/scope decision.' 330 1110 1000 40
 SavePage
 
-Page '03 / Backend class diagram' '03-classes' 1600 1180
+Page '03 / Backend class diagram' '03-classes' 1600 1320
 Box "User`n--------------------------------------`n+ Id: string`n+ Username: string`n+ PasswordHash: string`n+ Role: UserRole" 40 130 370 200
 Box "Complaint`n--------------------------------------`n+ ReferenceNumber: string`n+ SubmittedBy: string`n+ Title: string`n+ Category: ComplaintCategory`n+ Description: string`n+ Status: ComplaintStatus`n+ AgentNotes: string`n+ CreatedAt: DateTime`n+ UpdatedAt: DateTime" 40 420 370 310
-Box "ComplaintService`n-------------------------------------------------------------------`n- _storage: StorageService`n- _complaints: List<Complaint>`n- _users: List<User>`n+ ComplaintService()`n+ Authenticate(username: string, password: string): User?`n+ SubmitComplaint(username: string, title: string,`n    category: ComplaintCategory, description: string): Complaint`n+ TrackByReference(referenceNumber: string): Complaint?`n+ GetAllComplaints(categoryFilter: ComplaintCategory? = null,`n    statusFilter: ComplaintStatus? = null): List<Complaint>`n+ UpdateComplaintStatus(referenceNumber: string,`n    newStatus: ComplaintStatus, newCategory: ComplaintCategory,`n    agentNotes: string): bool" 510 130 980 390
-Box "StorageService`n-------------------------------------------------------------------`n- _complaintsFile: string`n- _usersFile: string`n+ LoadComplaints(): List<Complaint>`n+ SaveComplaints(complaints: List<Complaint>): void`n+ LoadUsers(): List<User>`n+ SaveUsers(users: List<User>): void`n+ HashPassword(password: string): string {static}" 620 650 720 270
+Box "ComplaintService`n-------------------------------------------------------------------`n- _storage: StorageService`n- _complaints: List<Complaint>`n- _users: List<User>`n+ ComplaintService(storage: StorageService? = null)`n+ Authenticate(username: string, password: string): User?`n+ SubmitComplaint(username: string, title: string,`n    category: ComplaintCategory, description: string): Complaint`n+ TrackByReference(referenceNumber: string): Complaint?`n+ GetAllComplaints(categoryFilter: ComplaintCategory? = null,`n    statusFilter: ComplaintStatus? = null): List<Complaint>`n+ UpdateComplaintStatus(referenceNumber: string,`n    newStatus: ComplaintStatus, newCategory: ComplaintCategory,`n    agentNotes: string): bool" 510 130 980 390
+Box "StorageService`n-------------------------------------------------------------------`n- _directory: string / _gate: object`n+ StorageService(dataDirectory: string? = null)`n+ LoadComplaints(): List<Complaint> {virtual}`n+ SaveComplaints(complaints: List<Complaint>): void {virtual}`n+ LoadUsers(): List<User> {virtual}`n+ SaveUsers(users: List<User>): void {virtual}`n+ RestoreComplaintsBackup(): bool`n+ RestoreUsersBackup(): bool`n+ HashPassword(password: string): string {static}`n~ ReserveReference(complaints: IReadOnlyCollection<Complaint>, year: int): string`n~ WithComplaintLock<T>(operation: Func<T>): T" 620 650 850 350
 Line 510 230 410 230; Text 'manages 0..*' 415 195 105 35 $small
 Line 510 470 410 560; Text 'manages 0..*' 414 545 120 35 $small
 Line 1000 520 1000 650; Text 'owns / uses 1' 1020 565 240 30
 Box "<<enumeration>> UserRole`nCustomer / SupportAgent / Admin" 40 810 390 90
 Box "<<enumeration>> ComplaintCategory`nBilling / Technical / Service / GeneralFeedback" 40 940 570 90
-Box "<<enumeration>> ComplaintStatus`nPending / InProgress / Resolved / Closed" 700 970 640 90
-Text 'Public model properties use +. SubmittedBy is a username string. Collection links describe the private lists; no User navigation property exists.' 40 1100 1470 50
+Box "<<enumeration>> ComplaintStatus`nPending / InProgress / Resolved / Closed" 700 1070 640 90
+Text 'Core classes and API shown; supporting private JSON helpers omitted. Public model properties use +. SubmittedBy is a username string. Services return copies of cached records.' 40 1240 1470 50
 SavePage
 
-Page '04 / Submit and track sequence' '04-sequence' 1500 1330
+Page '04 / Submit and track sequence' '04-sequence' 1500 1580
 $xs=@(100,400,850,1320)
 $names=@('Customer','CustomerForm','ComplaintService','StorageService')
-for($i=0;$i -lt 4;$i++){Box $names[$i] ($xs[$i]-80) 130 165 55;Line $xs[$i] 185 $xs[$i] 1230 $false $true}
+for($i=0;$i -lt 4;$i++){Box $names[$i] ($xs[$i]-80) 130 165 55;Line $xs[$i] 185 $xs[$i] 1450 $false $true}
 function Message($from,$to,$y,$label,$reply=$false) {Line $xs[$from] $y $xs[$to] $y $true $reply;Text $label ([Math]::Min($xs[$from],$xs[$to])+12) ($y-35) ([Math]::Abs($xs[$to]-$xs[$from])-20) 34 $small}
 Message 0 1 245 'Enter title/category/description; click Submit'
 Message 1 2 335 'SubmitComplaint(user.Username, title, category, desc)'
-Box "Validate title/description`nGenerate CMP-{year}-{Count + 1:D4}`nCreate Complaint; append to cached list" 750 370 490 95
-Message 2 3 535 'SaveComplaints(_complaints)'
-Box "Serialize and write`ncomplaints.json" 1200 570 255 75
-Message 3 2 685 'Save completes' $true
-Message 2 1 755 'Return new Complaint' $true
-Message 1 0 825 'Confirmation popup + lblGeneratedRef' $true
-Message 0 1 915 'Enter reference; click Search'
-Message 1 2 985 'TrackByReference(referenceNumber)'
-Message 2 1 1055 'Complaint? (lookup in cached list)' $true
-Message 1 0 1125 'Display Status, Category, UpdatedAt, AgentNotes' $true
-Text 'Alternatives: missing fields -> ArgumentException; JSON/file failure -> exception; missing reference -> null. UI shows an alert/no-match message. Success confirmation requires a successful save. Failed saves can leave cached changes in memory.' 160 1240 1200 75
+Box "Validate required fields and category" 750 370 490 70
+Message 2 3 510 'ReserveReference(existing records, current year)'
+Box "Persist reserved sequence`nreference-sequence.json" 1200 545 255 80
+Message 3 2 660 'Return unique reserved reference' $true
+Box "Stage new Pending complaint separately" 750 700 490 70
+Message 2 3 825 'SaveComplaints(candidate list)'
+Box "Flush temporary JSON;`natomic replace + backup" 1200 860 255 80
+Message 3 2 980 'Save completes' $true
+Message 2 1 1050 'Publish cache; return Complaint copy' $true
+Message 1 0 1120 'Confirmation popup + lblGeneratedRef' $true
+Message 0 1 1200 'Enter reference; click Search'
+Message 1 2 1280 'TrackByReference(referenceNumber)'
+Message 2 1 1350 'Complaint copy or null (snapshot lookup)' $true
+Message 1 0 1420 'Display read-only details or clear prior results' $true
+Text 'Errors: validation rejects missing fields; failed writes leave cached/primary records unchanged. Reserved references may leave gaps. Recovery is explicit; a previous-version backup can omit the latest changes.' 160 1480 1200 75
 SavePage
 
 Page '05 / LoginForm wireframe' '05-login' 1000 760
@@ -201,6 +205,55 @@ Box 'btnSaveUpdate' 1130 790 325 60
 Text 'Save disabled without selection. Populate action controls from the selected row; update by ReferenceNumber. Refresh clears filters. Admin account management and summary screens remain undecided scope.' 45 950 1460 70
 SavePage
 
+
+Page '09 / Complaint lifecycle activity' '09-activity' 1600 1580
+Box 'Start' 680 120 240 60 $true
+Line 800 180 800 230
+Box 'Enter username and password' 620 230 360 70
+Line 800 300 800 350
+Box 'Credentials valid?' 620 350 360 90 $true
+Line 620 395 460 395
+Text 'No' 530 365 70 25
+Box 'Show login error; retry' 130 350 330 90
+Line 295 350 295 265 $false
+Line 295 265 620 265
+Line 800 440 800 500
+Text 'Yes' 820 455 70 25
+Box 'Role and selected action' 620 500 360 90 $true
+Line 720 590 250 700
+Line 800 590 800 700
+Line 880 590 1350 700
+Text 'Customer: submit' 300 625 220 30
+Text 'Customer: track' 820 625 220 30
+Text 'Support Agent / Admin' 1080 625 300 30
+Box 'Enter title, category and description' 50 700 400 90
+Box 'Enter reference number' 600 700 400 90
+Box 'View/filter complaint list' 1150 700 400 90
+Line 250 790 250 860
+Line 800 790 800 860
+Line 1350 790 1350 860
+Box 'Validate required fields/category; reject invalid input without a ticket' 50 860 400 110
+Box 'Reject blank input; clear prior results; look up a nonblank reference' 600 860 400 110
+Box 'Select one row; edit category/status and multiline notes' 1150 860 400 110
+Line 250 970 250 1040
+Line 800 970 800 1040
+Line 1350 970 1350 1040
+Box 'Reserve reference; stage Pending record; atomically save JSON and backup' 50 1040 400 110
+Box 'Match: show read-only status/category/time/notes; miss: show no-match feedback' 600 1040 400 110
+Box 'Stage update; atomically persist; publish cache only after success' 1150 1040 400 110
+Line 250 1150 250 1220
+Line 800 1150 800 1220
+Line 1350 1150 1350 1220
+Box 'Saved: reference popup and label. Error: no success; cached records unchanged.' 50 1220 400 110
+Box 'Return to customer actions or close' 600 1220 400 110
+Box 'Saved: confirm and refresh. Error: show file error; reopen before retry.' 1150 1220 400 110
+Line 250 1330 800 1400
+Line 800 1330 800 1400
+Line 1350 1330 800 1400
+Box 'Return to actions or end' 620 1400 360 70 $true
+Text 'Recovery requires explicit operator action; backups are previous versions. Administrator account-management/summary scope remains a team decision.' 150 1510 1300 50
+SavePage
+
 $doc.Save((Join-Path $PSScriptRoot 'design.drawio'))
 foreach($item in @($pen,$ink,$paper,$fill,$font,$small,$heading)){$item.Dispose()}
-Write-Output 'Generated 8 editable draw.io pages and 8 PNG exports at 2x resolution.'
+Write-Output 'Generated 9 editable draw.io pages and 9 PNG exports at 2x resolution.'

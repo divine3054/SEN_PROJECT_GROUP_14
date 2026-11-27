@@ -14,12 +14,12 @@ Target submission date reported by the team: **4 December 2026**. Confirm this a
 
 ## 2. Fix and retest known issues
 
-- [ ] Member 1: clear the previous success/reference label after a rejected submission and decide whether a confirmation dialog is required.
-- [ ] Member 1: give blank tracking input explicit validation feedback; retain no-stale-result behavior for misses.
-- [ ] Member 1: agree and implement the agent grid columns, single-row selection, disabled-save state, and notes layout.
-- [ ] Member 1 and Member 2: show useful persistence/startup errors without false success.
-- [ ] Member 2: prevent or roll back cached changes after failed writes; define startup handling for corrupt JSON.
-- [ ] Rerun the relevant unit/integration and manual scenarios after every fix; record actual results in [TEST_PLAN.md](testing/TEST_PLAN.md).
+- [x] Clear stale success/reference feedback after a rejected submission and show the saved reference in a confirmation popup; UI-05/UI-14 pass.
+- [x] Blank tracking validation and no-stale-result feedback implemented; UI-06 passes.
+- [x] Six explicit grid columns, single-row selection, disabled-save state and multiline notes implemented and checked.
+- [x] Useful startup/save error handling implemented; failed-save messages verified by UI-07/UI-12. Actual startup/recovery dialogs still need the final human walkthrough.
+- [x] Cache-safe atomic saves and validated backup recovery implemented; 20 failure/reliability checks pass.
+- [x] Reran automated checks after integration: 34 xUnit cases, 20 reliability cases and 18 UI checks pass. Final human scenarios remain in section 3.
 
 ## 3. Complete quality assurance
 
@@ -56,4 +56,4 @@ Use the lecturer's required format/template if one exists. A complete report pac
 
 ## Current status
 
-The backend suite currently reports 34/34 passing tests, and exploratory UI checks are documented. MAN-07, full designated-PC performance acceptance, independent stakeholder acceptance, team-wide review/scope decisions, screenshots/video, final PDF, and submission are still outstanding. Do not mark the project complete until those team-required items are either completed or explicitly accepted as out-of-scope by the lecturer/team.
+The integrated working tree passes 34 xUnit backend tests, 20 reliability checks and 18 UI checks; the full solution builds with 0 warnings/errors. Current-host grid/filter/tracking timings and fresh evidence are in [INTEGRATION_REVIEW.md](INTEGRATION_REVIEW.md). A nine-page editable design pack with PNG exports is available. Remaining work is publishing the integrated source, wider team scope review, final designated-PC/manual recovery verification, stakeholder acceptance, human screenshots/video, the single final PDF and submission. The earlier planning date is not a verified course deadline.

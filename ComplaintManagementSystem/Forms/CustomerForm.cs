@@ -124,6 +124,8 @@ public class CustomerForm : Form
 
     private void BtnSubmit_Click(object? sender, EventArgs e)
     {
+        // A rejected attempt must not display a prior ticket as its success result.
+        _lblGeneratedRef.Text = string.Empty;
         if (string.IsNullOrWhiteSpace(_txtTitle.Text) || string.IsNullOrWhiteSpace(_txtDescription.Text))
         {
             _feedback.Show(this, "Enter a title and description before submitting.", "Required fields", MessageBoxIcon.Warning);
@@ -138,7 +140,6 @@ public class CustomerForm : Form
             return;
         }
 
-        _lblGeneratedRef.Text = string.Empty;
         try
         {
             var created = _service.SubmitComplaint(_currentUser.Username, _txtTitle.Text, category, _txtDescription.Text);

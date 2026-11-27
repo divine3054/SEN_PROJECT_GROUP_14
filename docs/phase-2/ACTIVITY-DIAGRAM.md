@@ -3,7 +3,7 @@
 Status: **Draft based on the current implementation; team review pending.**
 Prepared: 27 November 2026.
 
-The diagram follows the implemented Customer and Support Agent flows. Administrators are routed to the support workspace, but account management and ticket summaries are not implemented. Persistence-error branches describe the required response; the current UI does not handle every storage error gracefully.
+The diagram follows the integrated Customer and Support Agent flows. Administrators use the support workspace; account management and ticket summaries remain a scope decision. The editable activity page is included in [design.drawio](design.drawio), with a [PNG export](exports/09-activity.png). This technical refresh does not imply additional team approval.
 
 ```mermaid
 flowchart TD
@@ -18,16 +18,19 @@ flowchart TD
     EnterComplaint --> Required{Title and description nonblank?}
     Required -- No --> ValidationError[Show validation error]
     ValidationError --> EnterComplaint
-    Required -- Yes --> CreateComplaint[Create Pending complaint and reference]
-    CreateComplaint --> SaveComplaint[Write complaints.json]
+    Required -- Yes --> CreateComplaint[Reserve persistent reference and stage Pending complaint]
+    CreateComplaint --> SaveComplaint[Atomically replace complaints.json and retain backup]
     SaveComplaint --> SubmitSaved{Save successful?}
     SubmitSaved -- No --> SubmitError[Report save failure; do not show success]
-    SubmitSaved -- Yes --> ShowReference[Display reference number]
+    SubmitSaved -- Yes --> ShowReference[Publish cache and display reference popup and label]
     ShowReference --> CustomerAction
     SubmitError --> CustomerEnd((End))
 
     CustomerAction -- Track --> EnterReference[Enter reference number]
-    EnterReference --> FindComplaint[Look up reference]
+    EnterReference --> ReferenceRequired{Reference nonblank?}
+    ReferenceRequired -- No --> BlankReference[Clear old details and show validation alert]
+    BlankReference --> EnterReference
+    ReferenceRequired -- Yes --> FindComplaint[Clear old details and look up reference]
     FindComplaint --> Found{Complaint found?}
     Found -- Yes --> ShowDetails[Display category, status, update time and notes]
     Found -- No --> NoMatch[Show no-match message]
@@ -48,7 +51,7 @@ flowchart TD
 
 ## Review notes
 
-- The diagram records the intended save-failure outcome separately from demonstrated behavior. The backend mutates cached records before attempting to save; a failed write can leave in-memory state changed.
-- Blank tracking input currently follows the no-match path rather than showing a dedicated validation alert.
-- A successful customer submission currently displays the reference in the form; a separate confirmation dialog is not shown.
+- Cached changes now publish only after successful persistence. Failure-injection checks confirm that failed writes preserve the prior cache and primary file.
+- Blank tracking input has its own alert. Rejected submissions clear any previous success reference.
+- Successful submissions display both the returned reference label and a confirmation message. The automated UI suite records the message call; a human must still confirm actual dialog usability.
 - Administrator-specific account management and summary actions remain outside the implemented flows pending a team scope decision.

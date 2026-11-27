@@ -13,11 +13,14 @@ if (!$counters -or [int]$counters.total -eq 0 -or $results.Count -eq 0) {
 }
 $times = $trx.SelectSingleNode('//t:Times', $ns)
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-$baseline = & git -C $repoRoot rev-parse --short HEAD 2>$null
+$baseline = & git -c "safe.directory=$repoRoot" -C $repoRoot rev-parse --short HEAD 2>$null
 if ($LASTEXITCODE -ne 0) { $baseline = 'not available' }
+$workingChanges = & git -c "safe.directory=$repoRoot" -C $repoRoot status --porcelain 2>$null
+$sourceState = if ($workingChanges) { 'Includes local uncommitted changes; results apply to the tested working tree, not the remote commit alone.' } else { 'Clean working tree at report generation.' }
 $lines = @(
     '# Automated backend test results', '',
-    "Source revision before this uncommitted contribution: $baseline.",
+    "Source base revision at test run: $baseline.",
+    $sourceState,
     "Run start (as recorded by TRX): $($times.start).",
     "Run finish (as recorded by TRX): $($times.finish).", '',
     "Total: $($counters.total). Executed: $($counters.executed). Passed: $($counters.passed). Failed: $($counters.failed). Not executed: $($counters.notExecuted).", '',

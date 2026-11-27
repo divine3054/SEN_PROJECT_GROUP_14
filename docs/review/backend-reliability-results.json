@@ -1,0 +1,107 @@
+{
+  "RecordedAtUtc": "2026-11-27T17:24:13.2107378+00:00",
+  "Passed": 20,
+  "Failed": 0,
+  "Results": [
+    {
+      "Name": "REL-01 Failed submission leaves cache and disk unchanged; reserved reference is not reused",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-02 Failed status update leaves cached and saved fields unchanged",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-03 Migration allocates above largest existing reference instead of record count",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-04 Deleting the highest ticket does not reuse a previously issued reference",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-05 Reference sequence starts independently for a new year",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-06 Reference formatting expands beyond four digits without wrapping",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-07 Concurrent service instances in one process preserve all distinct submissions",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-08 Returned complaints and users cannot mutate private cached records",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-09 Empty submitter and undefined enum values are rejected without writes",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-10 Null or blank authentication/tracking inputs fail safely",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-11 Atomic replacement keeps a readable previous-version backup",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-12 A blocked replacement preserves the old primary and cleans its temporary file",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-13 Malformed/null/list-shape records are reported and left untouched",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-14 Backup restoration validates data and preserves the damaged primary",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-15 Invalid backup cannot overwrite a primary; absent backup reports false",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-16 Missing primary with an existing backup is never silently replaced with empty data",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-17 Users backup restores custom accounts without reseeding demonstration accounts",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-18 Duplicate references/usernames and undefined persisted enum values are rejected",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-19 Storage captures its directory instead of following later working-directory changes",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "REL-20 Corrupt or exhausted reference counter prevents submission without changing tickets",
+      "Passed": true,
+      "Message": "Passed"
+    }
+  ]
+}

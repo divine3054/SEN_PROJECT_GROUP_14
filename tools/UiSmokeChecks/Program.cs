@@ -1,5 +1,7 @@
 using System.Drawing.Imaging;
 using System.Text.Json;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using ComplaintManagementSystem.Data;
 using ComplaintManagementSystem.Forms;
 using ComplaintManagementSystem.Models;
@@ -11,6 +13,7 @@ internal static class Program
 {
     private static string _output = string.Empty;
     private static readonly List<CheckResult> Results = new();
+    private static readonly List<object> Measurements = new();
     private static readonly User Customer = new() { Username = "customer1", Role = UserRole.Customer };
     private static readonly User Agent = new() { Username = "agent1", Role = UserRole.SupportAgent };
 
@@ -182,7 +185,72 @@ internal static class Program
             Capture(agent, "06-agent-minimum");
         });
 
-        File.WriteAllText(Path.Combine(_output, "results.json"), JsonSerializer.Serialize(new { RecordedAtUtc = DateTimeOffset.UtcNow, Results }, new JsonSerializerOptions { WriteIndented = true }));
+        Run("UI-14 Rejected submission clears the previous successful reference", () =>
+        {
+            var service = new ComplaintService(); var messages = new RecordingFeedback();
+            using var form = Open(new CustomerForm(service, Customer, messages));
+            FillComplaint(form); Get<Button>(form, "btnSubmit").PerformClick();
+            Require(Get<Label>(form, "lblGeneratedRef").Text.Length > 0, "Successful reference was not shown.");
+            Get<Button>(form, "btnSubmit").PerformClick();
+            Require(Get<Label>(form, "lblGeneratedRef").Text == "", "Rejected submission retained an old success reference.");
+            Require(messages.Messages.Last().Icon == MessageBoxIcon.Warning && new StorageService().LoadComplaints().Count == 1, "Rejected resubmission changed records or missed validation.");
+        });
+        Run("UI-15 Customer submission and agent update remain visible after service restart", () =>
+        {
+            string reference;
+            using (var customer = Open(new CustomerForm(new ComplaintService(), Customer, new RecordingFeedback())))
+            {
+                FillComplaint(customer); Get<Button>(customer, "btnSubmit").PerformClick();
+                reference = new StorageService().LoadComplaints().Single().ReferenceNumber;
+            }
+            using (var agent = Open(new AgentForm(new ComplaintService(), Agent, new RecordingFeedback())))
+            {
+                SelectFirst(Get<DataGridView>(agent, "dgvComplaints"));
+                Get<ComboBox>(agent, "cmbUpdateStatus").SelectedItem = ComplaintStatus.Resolved;
+                Get<ComboBox>(agent, "cmbUpdateCategory").SelectedItem = ComplaintCategory.Service;
+                Get<TextBox>(agent, "txtAgentNotes").Text = "Resolved and confirmed after reopening.";
+                Get<Button>(agent, "btnSaveUpdate").PerformClick();
+            }
+            using var reopened = Open(new CustomerForm(new ComplaintService(), Customer, new RecordingFeedback()));
+            Get<TabControl>(reopened, "tabCustomer").SelectedIndex = 1; Application.DoEvents();
+            Get<TextBox>(reopened, "txtSearchRef").Text = reference;
+            Get<Button>(reopened, "btnSearch").PerformClick();
+            Require(Get<Label>(reopened, "lblTrackedStatus").Text == "Resolved"
+                && Get<Label>(reopened, "lblTrackedCategory").Text == "Service"
+                && Get<TextBox>(reopened, "txtTrackedAgentNotes").Text.Contains("after reopening"), "Cross-role persisted update was not displayed after restart.");
+        });
+        Run("UI-16 Grid load filter and tracking remain responsive with 1000 sample records", () =>
+        {
+            int year = DateTime.Now.Year;
+            new StorageService().SaveComplaints(Enumerable.Range(1, 1000).Select(i => new Complaint
+            {
+                ReferenceNumber = $"CMP-{year}-{i:D4}", SubmittedBy = "customer1", Title = $"Synthetic issue {i}",
+                Description = "UI performance sample", Category = i % 4 == 0 ? ComplaintCategory.Billing : ComplaintCategory.Technical,
+                Status = ComplaintStatus.Pending
+            }).ToList());
+            var service = new ComplaintService();
+            var timer = Stopwatch.StartNew();
+            using var agent = Open(new AgentForm(service, Agent, new RecordingFeedback()));
+            timer.Stop(); double loadMs = timer.Elapsed.TotalMilliseconds;
+            Require(Get<DataGridView>(agent, "dgvComplaints").Rows.Count == 1000, "Full grid did not bind 1000 rows.");
+            Get<ComboBox>(agent, "cmbFilterCategory").SelectedItem = ComplaintCategory.Billing;
+            timer.Restart(); Get<Button>(agent, "btnFilter").PerformClick(); Application.DoEvents(); timer.Stop();
+            double filterMs = timer.Elapsed.TotalMilliseconds;
+            Require(Get<DataGridView>(agent, "dgvComplaints").Rows.Count == 250, "Filtered grid has the wrong count.");
+            using var customer = Open(new CustomerForm(service, Customer, new RecordingFeedback()));
+            Get<TabControl>(customer, "tabCustomer").SelectedIndex = 1; Application.DoEvents();
+            Get<TextBox>(customer, "txtSearchRef").Text = $"CMP-{year}-1000";
+            timer.Restart(); Get<Button>(customer, "btnSearch").PerformClick(); Application.DoEvents(); timer.Stop();
+            double searchMs = timer.Elapsed.TotalMilliseconds;
+            Require(Get<Label>(customer, "lblTrackedReference").Text == $"CMP-{year}-1000", "Tracked record is wrong.");
+            Measurements.Add(new { Records = 1000, GridLoadMs = loadMs, FilterMs = filterMs, SearchMs = searchMs,
+                OS = RuntimeInformation.OSDescription, Runtime = RuntimeInformation.FrameworkDescription,
+                LogicalCpus = Environment.ProcessorCount, Dpi = agent.DeviceDpi });
+            Console.WriteLine($"UI performance: grid={loadMs:F1}ms, filter={filterMs:F1}ms, tracking={searchMs:F1}ms.");
+            Require(loadMs < 2000 && filterMs < 2000 && searchMs < 2000, "A UI operation exceeded the proposed two-second target on this test host.");
+        });
+
+        File.WriteAllText(Path.Combine(_output, "results.json"), JsonSerializer.Serialize(new { RecordedAtUtc = DateTimeOffset.UtcNow, Results, Measurements }, new JsonSerializerOptions { WriteIndented = true }));
         int failed = Results.Count(r => !r.Passed);
         Console.WriteLine($"UI checks: {Results.Count - failed} passed, {failed} failed, {Results.Count} total.");
         return failed == 0 ? 0 : 1;

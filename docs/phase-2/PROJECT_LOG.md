@@ -47,3 +47,12 @@ Upon receiving Member 3's actual confirmation, record their name/date and change
 - A draft complaint-lifecycle activity diagram and proposed feasibility/schedule/risk register are now available in this folder. Team review and decisions remain pending.
 - Manual malformed-storage recovery, full UI performance measurement, stakeholder acceptance, screenshot/video capture, and final report assembly remain outstanding.
 - **Member 3 sign-off:** OKOYE Chukwuemeka confirmed review and approval of the Phase 2 design on 27 November 2026, and explicitly authorized advancing to Phase 3. This records Member 3's approval only; wider team review, administrator scope decision, and other open requirements remain pending.
+
+## 27 November 2026 - Integration review and regression fixes
+
+- Fetched Member 3 commits e659b7f and 406036b from remote main and Member 1 completion commit 2fea1c6 from member1-ui-completion. Merged their histories locally in 57df846, preserving both authors' commits.
+- Preserved pending Member 2 source/additions via backup stash 9f5256021d1a02d8487c7b9ae3a3420b231cc096, then restored them over the integrated work. Older local Member 3 drafts remain in the backup rather than overwriting the newer remote contribution.
+- Reproduced and fixed the stale successful reference remaining visible after an invalid resubmission. Added native-control regressions for that case, reopened cross-role persistence and 1,000-record UI responsiveness.
+- Corrected stale unpushed status text and current persistence/reference requirements. Refreshed class/sequence diagrams and added the activity PNG/editable page.
+- Fresh results, evidence scope and remaining work are in ../INTEGRATION_REVIEW.md. This entry records technical work only; no stakeholder acceptance or broader team approval is inferred.
+- The merge is local. Pending backend/review changes and the local integration still need review and publication to the shared remote repository.

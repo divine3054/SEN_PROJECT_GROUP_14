@@ -1,8 +1,9 @@
 # Automated backend test results
 
-Source revision before this uncommitted contribution: e659b7f.
-Run start (as recorded by TRX): 2026-11-27T04:25:15.4271995+01:00.
-Run finish (as recorded by TRX): 2026-11-27T04:25:20.2366718+01:00.
+Source base revision at test run: 57df846.
+Includes local uncommitted changes; results apply to the tested working tree, not the remote commit alone.
+Run start (as recorded by TRX): 2026-11-27T18:34:25.4294760+01:00.
+Run finish (as recorded by TRX): 2026-11-27T18:34:28.1866192+01:00.
 
 Total: 34. Executed: 34. Passed: 34. Failed: 0. Not executed: 0.
 
@@ -12,41 +13,41 @@ Raw local evidence: TestResults/backend-tests.trx (ignored by Git). Reproduce wi
 
 ## Executed cases
 
-- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH01_SeededCredentialsReturnExpectedRole(username: "admin1", password: "admin123", role: Admin) - **Passed**; duration 00:00:00.0052589.
-- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH01_SeededCredentialsReturnExpectedRole(username: "agent1", password: "agent123", role: SupportAgent) - **Passed**; duration 00:00:00.0131075.
-- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH01_SeededCredentialsReturnExpectedRole(username: "customer1", password: "pass123", role: Customer) - **Passed**; duration 00:00:00.2301710.
-- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH02_UsernameComparisonIgnoresCase - **Passed**; duration 00:00:00.0523882.
-- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH03_InvalidCredentialsAreRejected(username: "", password: "") - **Passed**; duration 00:00:00.0393959.
-- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH03_InvalidCredentialsAreRejected(username: "customer1", password: "PASS123") - **Passed**; duration 00:00:00.0064631.
-- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH03_InvalidCredentialsAreRejected(username: "customer1", password: "wrong") - **Passed**; duration 00:00:00.0061264.
-- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH03_InvalidCredentialsAreRejected(username: "unknown", password: "pass123") - **Passed**; duration 00:00:00.0068113.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.CAT01_AllDefinedCategoriesCanBeSubmitted(category: Billing) - **Passed**; duration 00:00:00.0057291.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.CAT01_AllDefinedCategoriesCanBeSubmitted(category: GeneralFeedback) - **Passed**; duration 00:00:00.0081666.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.CAT01_AllDefinedCategoriesCanBeSubmitted(category: Service) - **Passed**; duration 00:00:00.0053378.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.CAT01_AllDefinedCategoriesCanBeSubmitted(category: Technical) - **Passed**; duration 00:00:00.0103248.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.FILTER01_CategoryStatusAndCombinedFiltersReturnMatchingRecords - **Passed**; duration 00:00:00.0127095.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.FILTER02_ListIsSortedByNewestCreationTime - **Passed**; duration 00:00:00.0121447.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.PERF01_FilterAndLookupOneThousandComplaintsWithinTwoSeconds - **Passed**; duration 00:00:00.0840417.
-  Output: OS=Microsoft Windows 10.0.26200; Runtime=.NET 10.0.15; Logical CPUs=8; Filter1000Ms=1.056; Lookup1000Ms=0.285
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.REF01_ReferencesRemainSequentialAfterServiceRestart - **Passed**; duration 00:00:00.0118641.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.SUB01_SubmissionPersistsTrimmedDetailsAndPendingStatus - **Passed**; duration 00:00:00.0071225.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.SUB02_MissingRequiredFieldsDoNotCreateComplaint(title: "   ", description: "Details") - **Passed**; duration 00:00:00.0100661.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.SUB02_MissingRequiredFieldsDoNotCreateComplaint(title: "", description: "Details") - **Passed**; duration 00:00:00.0048359.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.SUB02_MissingRequiredFieldsDoNotCreateComplaint(title: "Title", description: "") - **Passed**; duration 00:00:00.0048068.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.SUB02_MissingRequiredFieldsDoNotCreateComplaint(title: "Title", description: "\t") - **Passed**; duration 00:00:00.0046788.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.TRACK01_ReferenceLookupTrimsInputAndIgnoresCase - **Passed**; duration 00:00:00.0064788.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.TRACK02_UnknownOrBlankReferenceHasNoMatch(reference: "   ") - **Passed**; duration 00:00:00.0051389.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.TRACK02_UnknownOrBlankReferenceHasNoMatch(reference: "") - **Passed**; duration 00:00:00.0034993.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.TRACK02_UnknownOrBlankReferenceHasNoMatch(reference: "missing") - **Passed**; duration 00:00:00.0126018.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.UPDATE01_StatusCategoryNotesAndUpdatedTimeSurviveRestart - **Passed**; duration 00:00:00.0095769.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.UPDATE02_BlankNotesKeepExistingNotes - **Passed**; duration 00:00:00.0141297.
-- ComplaintManagementSystem.Tests.ComplaintServiceTests.UPDATE03_UnknownReferenceReturnsFalseWithoutChangingRecords - **Passed**; duration 00:00:00.0068118.
-- ComplaintManagementSystem.Tests.StorageServiceTests.STORE01_MissingComplaintFileReturnsEmptyList - **Passed**; duration 00:00:00.0903726.
-- ComplaintManagementSystem.Tests.StorageServiceTests.STORE02_UnicodeAndMultilineComplaintDetailsRoundTrip - **Passed**; duration 00:00:00.0693464.
-- ComplaintManagementSystem.Tests.StorageServiceTests.STORE03_DefaultUsersArePersistedOnceWithHashedPasswords - **Passed**; duration 00:00:00.7634440.
-- ComplaintManagementSystem.Tests.StorageServiceTests.STORE04_SavedUsersReplaceSeedAccounts - **Passed**; duration 00:00:00.1982096.
-- ComplaintManagementSystem.Tests.StorageServiceTests.STORE05_MalformedJsonRaisesErrorAndPreservesFile - **Passed**; duration 00:00:00.2335561.
-- ComplaintManagementSystem.Tests.StorageServiceTests.UNIT01_PasswordHashMatchesKnownSha256Vector - **Passed**; duration 00:00:00.0054666.
+- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH01_SeededCredentialsReturnExpectedRole(username: "admin1", password: "admin123", role: Admin) - **Passed**; duration 00:00:00.0071864.
+- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH01_SeededCredentialsReturnExpectedRole(username: "agent1", password: "agent123", role: SupportAgent) - **Passed**; duration 00:00:00.0085931.
+- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH01_SeededCredentialsReturnExpectedRole(username: "customer1", password: "pass123", role: Customer) - **Passed**; duration 00:00:00.0088105.
+- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH02_UsernameComparisonIgnoresCase - **Passed**; duration 00:00:00.0069439.
+- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH03_InvalidCredentialsAreRejected(username: "", password: "") - **Passed**; duration 00:00:00.0069996.
+- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH03_InvalidCredentialsAreRejected(username: "customer1", password: "PASS123") - **Passed**; duration 00:00:00.0069743.
+- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH03_InvalidCredentialsAreRejected(username: "customer1", password: "wrong") - **Passed**; duration 00:00:00.0074485.
+- ComplaintManagementSystem.Tests.AuthenticationTests.AUTH03_InvalidCredentialsAreRejected(username: "unknown", password: "pass123") - **Passed**; duration 00:00:00.0060292.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.CAT01_AllDefinedCategoriesCanBeSubmitted(category: Billing) - **Passed**; duration 00:00:00.0314401.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.CAT01_AllDefinedCategoriesCanBeSubmitted(category: GeneralFeedback) - **Passed**; duration 00:00:00.0261995.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.CAT01_AllDefinedCategoriesCanBeSubmitted(category: Service) - **Passed**; duration 00:00:00.0250570.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.CAT01_AllDefinedCategoriesCanBeSubmitted(category: Technical) - **Passed**; duration 00:00:00.0236519.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.FILTER01_CategoryStatusAndCombinedFiltersReturnMatchingRecords - **Passed**; duration 00:00:00.1286254.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.FILTER02_ListIsSortedByNewestCreationTime - **Passed**; duration 00:00:00.0878266.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.PERF01_FilterAndLookupOneThousandComplaintsWithinTwoSeconds - **Passed**; duration 00:00:00.0496115.
+  Output: OS=Microsoft Windows 10.0.26300; Runtime=.NET 10.0.15; Logical CPUs=16; Filter1000Ms=0.431; Lookup1000Ms=0.085
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.REF01_ReferencesRemainSequentialAfterServiceRestart - **Passed**; duration 00:00:00.0987527.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.SUB01_SubmissionPersistsTrimmedDetailsAndPendingStatus - **Passed**; duration 00:00:00.0271044.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.SUB02_MissingRequiredFieldsDoNotCreateComplaint(title: "   ", description: "Details") - **Passed**; duration 00:00:00.0988663.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.SUB02_MissingRequiredFieldsDoNotCreateComplaint(title: "", description: "Details") - **Passed**; duration 00:00:00.0091118.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.SUB02_MissingRequiredFieldsDoNotCreateComplaint(title: "Title", description: "") - **Passed**; duration 00:00:00.0083600.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.SUB02_MissingRequiredFieldsDoNotCreateComplaint(title: "Title", description: "\t") - **Passed**; duration 00:00:00.0087811.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.TRACK01_ReferenceLookupTrimsInputAndIgnoresCase - **Passed**; duration 00:00:00.0176110.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.TRACK02_UnknownOrBlankReferenceHasNoMatch(reference: "   ") - **Passed**; duration 00:00:00.0059962.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.TRACK02_UnknownOrBlankReferenceHasNoMatch(reference: "") - **Passed**; duration 00:00:00.0057723.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.TRACK02_UnknownOrBlankReferenceHasNoMatch(reference: "missing") - **Passed**; duration 00:00:00.0065737.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.UPDATE01_StatusCategoryNotesAndUpdatedTimeSurviveRestart - **Passed**; duration 00:00:00.0594942.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.UPDATE02_BlankNotesKeepExistingNotes - **Passed**; duration 00:00:00.0747097.
+- ComplaintManagementSystem.Tests.ComplaintServiceTests.UPDATE03_UnknownReferenceReturnsFalseWithoutChangingRecords - **Passed**; duration 00:00:00.0367624.
+- ComplaintManagementSystem.Tests.StorageServiceTests.STORE01_MissingComplaintFileReturnsEmptyList - **Passed**; duration 00:00:00.0026614.
+- ComplaintManagementSystem.Tests.StorageServiceTests.STORE02_UnicodeAndMultilineComplaintDetailsRoundTrip - **Passed**; duration 00:00:00.0080246.
+- ComplaintManagementSystem.Tests.StorageServiceTests.STORE03_DefaultUsersArePersistedOnceWithHashedPasswords - **Passed**; duration 00:00:00.0426257.
+- ComplaintManagementSystem.Tests.StorageServiceTests.STORE04_SavedUsersReplaceSeedAccounts - **Passed**; duration 00:00:00.0253377.
+- ComplaintManagementSystem.Tests.StorageServiceTests.STORE05_MalformedJsonRaisesErrorAndPreservesFile - **Passed**; duration 00:00:00.0069870.
+- ComplaintManagementSystem.Tests.StorageServiceTests.UNIT01_PasswordHashMatchesKnownSha256Vector - **Passed**; duration 00:00:00.0023123.
 
 ## Manual and acceptance evidence
 

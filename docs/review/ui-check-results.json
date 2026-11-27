@@ -1,0 +1,107 @@
+{
+  "RecordedAtUtc": "2026-11-27T17:34:41.321143+00:00",
+  "Results": [
+    {
+      "Name": "UI-01 Blank login is rejected and password is masked",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-02 Invalid login clears password and stays open",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-03 Valid Customer login returns authenticated role",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-03 Valid SupportAgent login returns authenticated role",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-03 Valid Admin login returns authenticated role",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-04 Empty complaint shows warning without creating a record",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-05 Submission saves ticket and confirms its returned reference",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-06 Tracking shows read-only details and clears them for missing or blank input",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-07 Failed submission retains text and reports no success",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-08 Empty agent grid has six explicit columns and editing is disabled",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-09 Agent filters combine correctly and refresh clears selection",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-10 Selected-ticket update persists category status and multiline notes",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-11 Updated ticket leaving active filter clears stale selection",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-12 Failed agent save shows error without success confirmation",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-13 Customer and agent layouts keep inputs usable at minimum size",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-14 Rejected submission clears the previous successful reference",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-15 Customer submission and agent update remain visible after service restart",
+      "Passed": true,
+      "Message": "Passed"
+    },
+    {
+      "Name": "UI-16 Grid load filter and tracking remain responsive with 1000 sample records",
+      "Passed": true,
+      "Message": "Passed"
+    }
+  ],
+  "Measurements": [
+    {
+      "Records": 1000,
+      "GridLoadMs": 312.6006,
+      "FilterMs": 168.9966,
+      "SearchMs": 25.0266,
+      "OS": "Microsoft Windows 10.0.26300",
+      "Runtime": ".NET 10.0.15",
+      "LogicalCpus": 16,
+      "Dpi": 192
+    }
+  ]
+}
