@@ -36,4 +36,4 @@ The run script uses the repository root for local users.json, complaints.json an
 - Member 2: Kailota Igwe - backend, storage and reliability.
 - Member 3: Chukwuemeka Okoye - test development, QA and documentation.
 
-See [requirements](docs/requirements/SRS.md), [design](docs/phase-2/README.md), [test plan](docs/testing/TEST_PLAN.md), and [submission checklist](docs/POST-CODING-CHECKLIST.md). Recorded phase approval is separate from stakeholder acceptance. The final PDF, demonstration video and final submission evidence are still to be assembled by the team.
+See [requirements](docs/requirements/SRS.md), [design](docs/phase-2/README.md), [test plan](docs/testing/TEST_PLAN.md), and [submission checklist](docs/POST-CODING-CHECKLIST.md). The [33-page report review copy](docs/submission/Group14-Project-Report.pdf) and [recorded application demonstration](docs/demo/Group14-Demonstration.mp4) are prepared. See [submission status](docs/submission/SUBMISSION_STATUS.md) for the remaining administrative details, scope decisions and actual human acceptance. Recorded phase approval is separate from stakeholder acceptance.

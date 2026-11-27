@@ -1,0 +1,61 @@
+{
+  "RecordedAtUtc": "2026-11-27T17:50:49.1389055+00:00",
+  "Success": true,
+  "Events": [
+    {
+      "TimeUtc": "2026-11-27T17:49:45.9319116+00:00",
+      "Title": "1. Login validation",
+      "Detail": "An incorrect password is rejected; password characters are masked."
+    },
+    {
+      "TimeUtc": "2026-11-27T17:49:50.6569672+00:00",
+      "Title": "2. Required-field validation",
+      "Detail": "A complaint requires a title, category and description."
+    },
+    {
+      "TimeUtc": "2026-11-27T17:49:55.4970284+00:00",
+      "Title": "3. Submit a Billing complaint",
+      "Detail": "The real service saves the ticket and returns its unique reference."
+    },
+    {
+      "TimeUtc": "2026-11-27T17:50:04.3048114+00:00",
+      "Title": "4. Track the saved reference",
+      "Detail": "The Customer sees Pending status and initial review notes."
+    },
+    {
+      "TimeUtc": "2026-11-27T17:50:08.7893231+00:00",
+      "Title": "5. Unknown and blank reference checks",
+      "Detail": "A miss clears prior details; blank input gets an explicit alert."
+    },
+    {
+      "TimeUtc": "2026-11-27T17:50:15.6472938+00:00",
+      "Title": "6. Support Agent login",
+      "Detail": "A fresh service reloads persisted records for the agent workflow."
+    },
+    {
+      "TimeUtc": "2026-11-27T17:50:21.7310822+00:00",
+      "Title": "7. Filter and refresh the ticket grid",
+      "Detail": "A Technical filter has no match; Refresh restores all complaints."
+    },
+    {
+      "TimeUtc": "2026-11-27T17:50:26.9985158+00:00",
+      "Title": "8. Resolve the selected ticket",
+      "Detail": "One selected row enables status/category editing and multiline notes."
+    },
+    {
+      "TimeUtc": "2026-11-27T17:50:34.9263723+00:00",
+      "Title": "9. Reopen and reload persisted data",
+      "Detail": "A new service reads the saved update before the Customer signs in again."
+    },
+    {
+      "TimeUtc": "2026-11-27T17:50:38.2146138+00:00",
+      "Title": "10. Persisted resolution confirmed",
+      "Detail": "The Customer now sees Resolved, Service, the update time and the agent\u0027s saved notes."
+    },
+    {
+      "TimeUtc": "2026-11-27T17:50:44.2604813+00:00",
+      "Title": "Demonstration complete",
+      "Detail": "Core workflow, validation, filtering and persisted resolution demonstrated. Human acceptance is recorded separately."
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+# Preserve generated media byte-for-byte, including ASCII-encoded PDF streams.
+*.pdf binary
+*.mp4 binary
+*.png binary

@@ -1,0 +1,19 @@
+{
+  "institution": null,
+  "course_title": "Software Engineering - C# Group Project",
+  "course_code": null,
+  "lecturer": null,
+  "confirmed_deadline": null,
+  "submission_destination": null,
+  "group": 14,
+  "project_title": "Complaint and Feedback Management System",
+  "members": [
+    { "name": "Eregha Tarilah", "matriculation_number": null, "role": "Member 1 - UI and navigation" },
+    { "name": "Kailota Igwe", "matriculation_number": null, "role": "Member 2 - backend and storage" },
+    { "name": "Chukwuemeka Okoye", "matriculation_number": null, "role": "Member 3 - automated tests, QA and documentation" }
+  ],
+  "scope_confirmation": "Pending team confirmation; the working baseline defers separate administrator account management and summaries.",
+  "stakeholder_acceptance": "Pending actual Customer and Support Agent reviewer confirmation.",
+  "repository_url": "https://github.com/divine3054/SEN_PROJECT_GROUP_14",
+  "video_url": "https://github.com/divine3054/SEN_PROJECT_GROUP_14/blob/main/docs/demo/Group14-Demonstration.mp4"
+}

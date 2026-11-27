@@ -7,7 +7,7 @@ Target submission date reported by the team: **4 December 2026**. Confirm this a
 - [ ] All three members review the [SRS](requirements/SRS.md), diagrams, [test plan](testing/TEST_PLAN.md), [activity diagram](phase-2/ACTIVITY-DIAGRAM.md), and [feasibility/schedule/risk draft](phase-2/FEASIBILITY-SCHEDULE-RISKS.md).
 - [ ] Record the Administrator scope decision. Recommended for the short deadline: explicitly defer account management and summaries from this baseline; if retained, implement and test them.
 - [ ] Confirm the current unrestricted status/category update policy or agree and implement transition/role restrictions.
-- [ ] Agree on the single-instance, no-deletion reference-number assumption or implement a collision-safe sequence.
+- [ ] Agree on the single-instance, no-deletion reference-number assumption and the implemented durable sequence (including allowed gaps).
 - [ ] Agree on how malformed/unwritable JSON is recovered and how failed saves affect cached data.
 - [ ] Confirm each member's role and contribution evidence. Put matriculation numbers only in the team-approved report location, not public repository documentation unless explicitly required and approved.
 - [ ] Update `docs/phase-2/PROJECT_LOG.md` with the other reviewers' names/dates and the final scope decisions. Member 3's Phase 2 approval and Phase 3 authorization are recorded there; they do not represent whole-team approval.
@@ -23,10 +23,10 @@ Target submission date reported by the team: **4 December 2026**. Confirm this a
 
 ## 3. Complete quality assurance
 
-- [ ] Run `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\Test-Backend.ps1` from the repository root on the final source revision. Review the generated [TEST_RESULTS.md](testing/TEST_RESULTS.md); keep the TRX as local evidence or put it in the team-approved evidence store.
+- [x] Ran `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\Test-Backend.ps1` from the repository root on the final source revision. Review the generated [TEST_RESULTS.md](testing/TEST_RESULTS.md); keep the TRX as local evidence or put it in the team-approved evidence store.
 - [ ] Repeat MAN-01 through MAN-06 as a team on the designated Windows demonstration computer. Record tester, date, exact input, expected/actual output, pass/fail, build/revision and screenshot filename.
 - [ ] Run MAN-07 using an isolated disposable working directory: malformed JSON and an unwritable complaint file. Never risk the only copy of team data.
-- [ ] Measure full UI load/filter/search response with 1,000 synthetic records on the designated computer; record machine/runtime details and measurements. Current PERF01 is a service-level microbenchmark only.
+- [ ] Measure full UI load/filter/search response with 1,000 synthetic records on the designated computer; record machine/runtime details and measurements. Current evidence includes service PERF01 and a 1,000-row native UI measurement on the development host; repeat if the designated computer differs.
 - [ ] Have one Customer and one Support Agent representative complete the SRS acceptance scenarios. Record their names, feedback, decision, date, and unresolved limitations. Do not treat developer/assistant exploratory checks as stakeholder acceptance.
 
 ## 4. Assemble the final report and demo
@@ -42,18 +42,18 @@ Use the lecturer's required format/template if one exists. A complete report pac
 - [ ] Build/test commands and fresh automated, manual, performance and stakeholder acceptance results, including environment and limitations.
 - [ ] Known defects, security/privacy limitations, future improvements and conclusion.
 - [ ] Individual contribution statements and references/citations required by the course.
-- [ ] Create a short screen recording showing a customer submission and tracking, an agent filter/update, and the persisted result after restart. Use synthetic data; do not expose real personal complaint information.
-- [ ] Save the final PDF and demo recording in an approved shared location. Reopen/download both to confirm they work; test link permissions from an intended reviewer account.
+- [x] Created an automated short screen recording showing a customer submission and tracking, an agent filter/update, and the persisted result after restart. Use synthetic data; do not expose real personal complaint information.
+- [x] Prepared a 33-page PDF review copy and demo MP4 in docs/submission/ and docs/demo/. Every PDF page was rendered, and the full video decodes. Final human review and submission remain pending.
 - [ ] Have every member review the final PDF, spelling, screenshots, links and contribution attributions before submission.
 
 ## 5. Repository and submission
 
 - [ ] Review `git diff --check`, `git status`, tests and the final commit history.
-- [ ] Push the contribution branch/commit using the team's agreed workflow; open a pull request if required and verify remote attribution.
-- [ ] Keep generated build files, local complaint/user JSON, credentials, and machine-specific artifacts out of Git.
+- [x] Published the integrated commits to shared main and verified the remote revision, preserving all three authors' histories.
+- [x] Kept generated build files, local complaint/user JSON and machine-specific artifacts out of Git.
 - [ ] Submit the PDF, recording/link, repository URL and any required appendices through the lecturer's required channel before the confirmed deadline.
 - [ ] Save the submission receipt/confirmation and tell all members where the final artifacts are stored.
 
 ## Current status
 
-The integrated working tree passes 34 xUnit backend tests, 20 reliability checks and 18 UI checks; the full solution builds with 0 warnings/errors. Current-host grid/filter/tracking timings and fresh evidence are in [INTEGRATION_REVIEW.md](INTEGRATION_REVIEW.md). A nine-page editable design pack with PNG exports is available. Remaining work is publishing the integrated source, wider team scope review, final designated-PC/manual recovery verification, stakeholder acceptance, human screenshots/video, the single final PDF and submission. The earlier planning date is not a verified course deadline.
+The published application baseline passes 34 xUnit backend tests, 20 reliability checks and 18 UI checks; the full solution builds with 0 warnings/errors. Current-host measurements are in [INTEGRATION_REVIEW.md](INTEGRATION_REVIEW.md). The design pack, report review copy, automated demo recording and screenshots are prepared. Remaining work is administrative metadata, team scope/report review, designated-PC/manual recovery verification, actual stakeholder acceptance and submission. See [current submission status](submission/SUBMISSION_STATUS.md). The earlier planning date is not a verified course deadline.

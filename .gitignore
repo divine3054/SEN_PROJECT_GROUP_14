@@ -16,3 +16,5 @@ users.json.*.tmp
 reference-sequence.json
 reference-sequence.json.bak
 reference-sequence.json.*.tmp
+docs/submission/report-metadata.private.json
+docs/demo/capture.log
