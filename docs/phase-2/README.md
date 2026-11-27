@@ -2,9 +2,11 @@
 
 Prepared: 26 November 2026 (Africa/Lagos). Model: Waterfall.
 
-**Review baseline prepared; team approval pending. Phase 3 is not signed off.**
+**Member 3 approved Phase 2 and explicitly authorized Phase 3 on 27 November 2026. Wider team review and unresolved scope decisions remain pending.**
 
 Open [design.drawio](design.drawio) in diagrams.net/draw.io. Its eight editable pages have matching 2x-resolution PNGs in [exports](exports/). Use these exports in the PDF report. Recreate both formats with `powershell -File docs/phase-2/Generate-Design.ps1` from the repository root (script execution must be permitted by the local PowerShell policy). No application source changes are part of this design pack.
+
+The complaint-lifecycle [activity diagram](ACTIVITY-DIAGRAM.md) and [feasibility, schedule and risk draft](FEASIBILITY-SCHEDULE-RISKS.md) are separate review documents. They are proposed material, not team-approved decisions.
 
 ## 1. Architecture
 

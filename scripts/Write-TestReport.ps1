@@ -21,19 +21,24 @@ $lines = @(
     "Run start (as recorded by TRX): $($times.start).",
     "Run finish (as recorded by TRX): $($times.finish).", '',
     "Total: $($counters.total). Executed: $($counters.executed). Passed: $($counters.passed). Failed: $($counters.failed). Not executed: $($counters.notExecuted).", '',
-    'These results were generated from actual xUnit/VSTest output. They cover backend unit/integration checks, not WinForms system testing, performance, stakeholder acceptance or phase approval.', '',
+    'These results were generated from actual xUnit/VSTest output. They cover backend unit/integration checks, including a filter/lookup microbenchmark. They do not measure WinForms grid rendering or establish stakeholder acceptance or phase approval.', '',
     'Raw local evidence: TestResults/backend-tests.trx (ignored by Git). Reproduce with scripts/Test-Backend.ps1. Member 3 must rerun on their own machine before committing their verification record.', '',
     '## Executed cases', ''
 )
 foreach ($result in ($results | Sort-Object testName)) {
     $name = $result.testName.Replace('`', "'").Replace("`r", ' ').Replace("`n", ' ')
     $lines += "- $name - **$($result.outcome)**; duration $($result.duration)."
+    $testOutput = $result.SelectSingleNode('t:Output/t:StdOut', $ns)
+    if ($testOutput -and ![string]::IsNullOrWhiteSpace($testOutput.InnerText)) {
+        $outputText = $testOutput.InnerText.Trim().Replace("`r", '').Replace("`n", '; ')
+        $lines += "  Output: $outputText"
+    }
     if ($result.outcome -ne 'Passed' -and $result.Output.ErrorInfo.Message) {
         $lines += "  Error: $($result.Output.ErrorInfo.Message)"
     }
 }
 $lines += @('', '## Manual and acceptance evidence', '',
-    'MAN-01 through MAN-07, PERF-01 and stakeholder acceptance remain NOT RUN. See TEST_PLAN.md. No human tester signature or Member 3 approval is inferred from this automated run.')
+    'Assisted UI observations, remaining manual scenarios, stakeholder acceptance, and evidence limitations are recorded in TEST_PLAN.md. Member 3 phase approval is recorded separately in docs/phase-2/PROJECT_LOG.md.')
 $encoding = New-Object Text.UTF8Encoding($false)
 [IO.File]::WriteAllLines([IO.Path]::GetFullPath($OutputFile), [string[]]$lines, $encoding)
 Write-Output "Wrote $OutputFile"

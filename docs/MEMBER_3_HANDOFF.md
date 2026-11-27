@@ -1,89 +1,45 @@
-# Member 3 contribution: requirements, automated tests and QA records
+# Member 3 contribution status and remaining work
 
-Prepared against main commit 8e4b9d5. The application UI/backend already exist at that revision. This package adds documentation and a real xUnit test project; it does not replace application source files or supply a Phase 2 signature.
+Updated: 27 November 2026. Project target date supplied by the team: 4 December 2026.
 
-## 1. Files to copy
+This handoff reflects the current repository and separates verified work from team decisions and evidence that must not be invented.
 
-The handoff ZIP preserves repository-relative paths. Open its files in your editor to review or copy/paste their contents into the matching paths in your own clone. Do not copy build output, .tools, JSON data or another person's .git folder.
+## Completed in the repository
 
-- ComplaintManagementSystem.Tests/ComplaintManagementSystem.Tests.csproj - xUnit packages and reference to the real app.
-- ComplaintManagementSystem.Tests/TestWorkspace.cs - isolated temporary folders and sequential execution.
-- ComplaintManagementSystem.Tests/AuthenticationTests.cs - valid/invalid login cases.
-- ComplaintManagementSystem.Tests/ComplaintServiceTests.cs - submission, categories, references, lookup, filters and updates.
-- ComplaintManagementSystem.Tests/StorageServiceTests.cs - JSON round trips, users and hashing/corrupt-file checks.
-- docs/requirements/SRS.md - draft requirements and acceptance criteria.
-- docs/testing/TEST_PLAN.md - automated cases, manual scenarios and open issues.
-- docs/testing/TEST_RESULTS.md - actual prepared run evidence; regenerate with your own run before committing.
-- scripts/Test-Backend.ps1 - build, execute tests and refresh result evidence.
-- scripts/Write-TestReport.ps1 - convert actual TRX output into the Markdown result record.
-- docs/MEMBER_3_HANDOFF.md - these instructions.
+- Draft requirements and acceptance criteria: [SRS](requirements/SRS.md).
+- xUnit project referencing the real application, covering authentication, complaint workflows, storage and a 1,000-record backend filter/lookup measurement.
+- Reproducible runner and TRX-based report generator: `scripts/Test-Backend.ps1` and `scripts/Write-TestReport.ps1`.
+- Automated results: 34 passed, 0 failed. The runner builds the solution. NuGet vulnerability-metadata retrieval warned because the network request failed; restore/build/test still succeeded.
+- Exploratory local UI checks, with limitations recorded in [TEST_PLAN.md](testing/TEST_PLAN.md). These are not independent stakeholder acceptance.
+- Draft activity diagram and feasibility/schedule/risk register in [docs/phase-2](phase-2/README.md).
+- First contribution commit: `e659b7f` (`Member 3: Add requirements, backend tests, and QA evidence`). It is local and has not been pushed.
 
-Two repository integration changes are also included: ComplaintManagementSystem.sln adds the test project, and .gitignore ignores generated TestResults directories. If the team's main branch has advanced, preserve newer solution/ignore changes and add the project with `dotnet sln ComplaintManagementSystem.sln add ComplaintManagementSystem.Tests/ComplaintManagementSystem.Tests.csproj`; append `**/TestResults/` to .gitignore if absent. Do not overwrite newer work blindly.
+## Required team decisions
 
-## 2. Before copying - run in your own clone
+- Confirm whether Administrator account management and ticket summaries are deferred from this baseline or added to the first release.
+- Confirm the status-transition and role-authorization policy with the team. Member 3 selected the current unrestricted enum-to-enum updates for the classroom baseline; the present service has no actor-level role enforcement.
+- Review the SRS, reference-number assumptions, storage/recovery behavior, activity diagram and proposed schedule/risk register.
+- Confirm the course deadline and member availability. The current planning target is 4 December 2026, but the proposed schedule is not team-approved.
+- Member 3's Phase 2 approval and explicit Phase 3 authorization were confirmed by OKOYE Chukwuemeka on 27 November 2026. Wider team review and scope decisions remain pending.
 
-Use Windows with the .NET 10 SDK installed. Ensure you are a collaborator on the shared GitHub repository and signed in to your own GitHub account. If you do not have a clone yet:
+## Work still needed before the project can be called complete
 
-```powershell
-git clone https://github.com/divine3054/SEN_PROJECT_GROUP_14.git
-cd SEN_PROJECT_GROUP_14
-```
+1. **Close UI/backend defects:** decide and fix the missing submit confirmation, blank-reference validation, stale reference label after a rejected submission, grid columns/selection behavior, and storage-error recovery. See QA-01 through QA-04 in the test plan.
+2. **Finish manual verification:** run MAN-07 in an isolated data folder; re-run MAN-01 through MAN-06 as a team on the designated PC and retain screenshots with tester/date/input/result.
+3. **Finish performance acceptance:** record full WinForms grid/search/filter responsiveness and machine details on the designated demonstration PC. The current `PERF01` result is backend-only.
+4. **Run stakeholder acceptance:** Customer and Support Agent reviewers walk through the SRS scenarios and record names, feedback and decisions.
+5. **Complete report and demo:** follow the [post-coding checklist](POST-CODING-CHECKLIST.md), use the approved report template, and verify the final PDF and recording links.
+6. **Finish team phase review:** record the other members' review and the agreed scope decisions in `docs/phase-2/PROJECT_LOG.md`. Member 3's own approval is recorded; do not infer team consensus from it.
+7. **Deliver the contribution:** review `git diff --check`, push the local commit/branch as the team requires, open a pull request if required, and verify remote attribution.
 
-If you already have the clone, open a terminal in its repository root. Then:
+No independent stakeholder acceptance, screenshot/video capture, or team consensus is inferred by this handoff. The local UI verification created and updated the sample reference `CMP-2026-0001`; it remains in the application's local data directory.
 
-```powershell
-git status
-git switch main
-git pull --ff-only origin main
-git switch -c member3-requirements-tests
-git config user.name
-git config user.email
-```
+## Reproduce the backend suite
 
-Start from a clean working tree; preserve or finish any existing work before changing branches. Check that the name is yours and the email is an address verified on YOUR GitHub account (or your own GitHub-provided no-reply address). If incorrect, set repository-local identity using your actual details:
-
-```powershell
-git config user.name "YOUR FULL NAME"
-git config user.email "YOUR VERIFIED GITHUB EMAIL"
-```
-
-The two uppercase strings are instructions to replace, not values to commit. Do not reuse a teammate's identity. Repository-local git config does not change source files or the identity on other repositories.
-
-## 3. Review and run
-
-Copy the listed files into your clone. Read each test and requirement. Check the open issues and proposed scope assumptions with Members 1 and 2; make the changes you own before submitting the contribution. Mark the SRS as validated only after the actual team review.
-
-From the repository root:
+From the repository root on Windows with .NET 10:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-Backend.ps1
 ```
 
-The runner finds the repository-local SDK if present, otherwise uses dotnet on PATH. It builds the complete solution and runs tests. First restore requires internet. Expected prepared baseline: 33 passing test cases. Use your actual output as the result; investigate any failures rather than copying that count.
-
-The script regenerates docs/testing/TEST_RESULTS.md from your fresh TRX results. Read it. The raw TestResults folder is ignored. The fixture data is created under your temporary directory, not in the live app's data files. No WinForms screens are launched by these backend tests.
-
-## 4. Commit your reviewed work and push your branch
-
-```powershell
-git diff --check
-git add .gitignore ComplaintManagementSystem.sln ComplaintManagementSystem.Tests docs/requirements/SRS.md docs/testing/TEST_PLAN.md docs/testing/TEST_RESULTS.md docs/MEMBER_3_HANDOFF.md scripts/Test-Backend.ps1 scripts/Write-TestReport.ps1
-git diff --cached --stat
-git diff --cached
-git commit -m "Member 3: Add requirements, backend tests, and QA evidence"
-git push -u origin member3-requirements-tests
-git status
-git log -1 --format=fuller
-```
-
-Open the shared repository on GitHub and create a pull request from member3-requirements-tests into main. Describe the tests/documents, your actual results and the still-unrun manual scenarios. Ask a teammate to review and merge. Verify GitHub attributes the commit to your account. A new test project is a coding contribution; the commit should reflect your review, execution and understanding of the files.
-
-## 5. Work still owned by Member 3 after this first commit
-
-- Carry out and record the manual system/acceptance tests in TEST_PLAN.md; include real inputs, expected/actual results, tester/date and screenshots.
-- Create the missing activity diagram and complete feasibility/schedule/risk material with the team.
-- Gather all three members' full names/matriculation numbers and verify individual GitHub contributions.
-- Assemble the final report PDF, screen-recorded demo and viewable links.
-- Record a genuine Phase 2 sign-off only when you have reviewed the design and approved its scope. This handoff does not sign on your behalf.
-
-Member 1 should address UI issues from the test plan; Member 2 should address persistence/recovery issues. Neither member needs to rewrite work that already exists. The repository's existing Live Preview task is a separate Member 1 setup fix; use the CLI runner here for QA.
+Tests use unique temporary working directories and serialize within the test assembly because storage uses relative filenames. Generated `TestResults` output is ignored by Git. Read the freshly generated `docs/testing/TEST_RESULTS.md`; do not copy old counts over new results.

@@ -31,7 +31,7 @@ Authentication, filtering and agent notes are team-selected supporting features.
 
 - **NFR-01 - Usability.** Password text must be masked, category/status choices must use dropdowns, tracking results must be read-only, and agent edits must target a selected record. Verify manually with MAN-01/MAN-04/MAN-05; a backend test cannot establish screen usability.
 - **NFR-02 - Validation and reliability.** Reject empty title/description; retain valid JSON after successful save/reload; surface persistence errors without a false success notification. Corrupt JSON must not be silently overwritten. SUB02/STORE05 provide partial evidence. Startup recovery and failed-save rollback remain open defects requiring Member 2 work and Member 1 UI handling.
-- **NFR-03 - Performance (proposed target).** On the demonstration Windows computer, search/filter 1,000 locally stored records within 2 seconds. Record machine details and measurements before claiming acceptance. PERF-01 is not yet run.
+- **NFR-03 - Performance (proposed target).** On the demonstration Windows computer, search/filter 1,000 locally stored records within 2 seconds. The latest backend-only PERF-01 run on the current test host measured category/status filtering at 1.056 ms and last-reference lookup at 0.285 ms (Windows `10.0.26200`, .NET `10.0.15`, 8 logical CPUs). This does not measure WinForms grid rendering or confirm the designated demonstration PC; full performance acceptance remains pending. See [test plan](../testing/TEST_PLAN.md) and [results](../testing/TEST_RESULTS.md).
 - **NFR-04 - Maintainability.** Forms call ComplaintService; business rules reside in Services; JSON access resides in Data; reusable data types reside in Models. Tests reference the real application project. No duplicate backend implementation is maintained in the tests.
 - **NFR-05 - Buildability and portability.** Build the app and test project on Windows with the .NET 10 SDK. Test fixtures must not depend on a developer username or modify real application JSON. Verify the solution build and automated suite on each contributor's machine.
 - **NFR-06 - Demonstration credential handling.** Store password hashes rather than plaintext passwords. The supplied implementation uses unsalted SHA-256/Base64 and known demo credentials. This is a classroom demonstration baseline, not a production authentication claim. Evidence: UNIT01/STORE03 and AUTH01-AUTH03.
@@ -58,5 +58,6 @@ Automated backend results, manual UI results and stakeholder acceptance must be 
 
 - Requirements validation by the three members: Pending.
 - Approval of the administrator scope adjustment and single-instance assumptions: Pending.
-- Formal Phase 2 approval by Member 3: Pending actual confirmation in ../phase-2/PROJECT_LOG.md.
-- No signatures, user acceptance or retrospective dates are inferred by this document.
+- Member 3 selected the current unrestricted enum-to-enum status/category update policy for the classroom baseline; wider team review remains pending.
+- Formal Phase 2 approval and explicit Phase 3 authorization by Member 3: OKOYE Chukwuemeka, 27 November 2026; wider team review and scope decisions remain pending. See ../phase-2/PROJECT_LOG.md.
+- No stakeholder acceptance or signature is inferred by this document; the Member 3 approval is recorded as a direct confirmation in ../phase-2/PROJECT_LOG.md.

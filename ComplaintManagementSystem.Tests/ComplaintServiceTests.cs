@@ -1,13 +1,22 @@
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using ComplaintManagementSystem.Data;
 using ComplaintManagementSystem.Models;
 using ComplaintManagementSystem.Services;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace ComplaintManagementSystem.Tests;
 
 public sealed class ComplaintServiceTests : IDisposable
 {
     private readonly TestWorkspace _workspace = new();
+    private readonly ITestOutputHelper _output;
+
+    public ComplaintServiceTests(ITestOutputHelper output)
+    {
+        _output = output;
+    }
 
     [Fact]
     public void SUB01_SubmissionPersistsTrimmedDetailsAndPendingStatus()
@@ -146,6 +155,48 @@ public sealed class ComplaintServiceTests : IDisposable
         string before = File.ReadAllText("complaints.json");
         Assert.False(service.UpdateComplaintStatus("missing", ComplaintStatus.Closed, ComplaintCategory.Billing, "Notes"));
         Assert.Equal(before, File.ReadAllText("complaints.json"));
+    }
+
+    [Fact]
+    public void PERF01_FilterAndLookupOneThousandComplaintsWithinTwoSeconds()
+    {
+        int year = DateTime.Now.Year;
+        var complaints = Enumerable.Range(1, 1000)
+            .Select(i => new Complaint
+            {
+                ReferenceNumber = $"CMP-{year}-{i:D4}",
+                SubmittedBy = "customer1",
+                Title = $"Issue {i}",
+                Category = i % 4 == 0 ? ComplaintCategory.Billing : ComplaintCategory.Technical,
+                Description = "Performance test data",
+                Status = i % 4 == 0 ? ComplaintStatus.Resolved : ComplaintStatus.Pending,
+                CreatedAt = DateTime.Now.AddMinutes(-i),
+                UpdatedAt = DateTime.Now.AddMinutes(-i)
+            })
+            .ToList();
+        new StorageService().SaveComplaints(complaints);
+        var service = new ComplaintService();
+
+        var filterTimer = Stopwatch.StartNew();
+        var filtered = service.GetAllComplaints(ComplaintCategory.Billing, ComplaintStatus.Resolved);
+        filterTimer.Stop();
+
+        var lookupTimer = Stopwatch.StartNew();
+        var found = service.TrackByReference($"CMP-{year}-1000");
+        lookupTimer.Stop();
+
+        _output.WriteLine(
+            $"OS={RuntimeInformation.OSDescription}; Runtime={RuntimeInformation.FrameworkDescription}; " +
+            $"Logical CPUs={Environment.ProcessorCount}; " +
+            $"Filter1000Ms={filterTimer.Elapsed.TotalMilliseconds:F3}; " +
+            $"Lookup1000Ms={lookupTimer.Elapsed.TotalMilliseconds:F3}");
+
+        Assert.Equal(250, filtered.Count);
+        Assert.NotNull(found);
+        Assert.True(filterTimer.Elapsed < TimeSpan.FromSeconds(2),
+            $"Filtering 1,000 records took {filterTimer.Elapsed.TotalMilliseconds:F3} ms.");
+        Assert.True(lookupTimer.Elapsed < TimeSpan.FromSeconds(2),
+            $"Looking up a record in 1,000 records took {lookupTimer.Elapsed.TotalMilliseconds:F3} ms.");
     }
 
     public void Dispose() => _workspace.Dispose();

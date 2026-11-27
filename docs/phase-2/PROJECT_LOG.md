@@ -38,3 +38,12 @@ This entry supersedes the earlier untracked/backend-build findings. It records t
 - **Approval date and confirming name:** Pending.
 
 Upon receiving Member 3's actual confirmation, record their name/date and change the status to: **Approved to advance to Phase 3: Implementation (WinForms UI)**. Member 3 should also confirm that the entry is saved in the team's master report, or designate this repository log as that record.
+
+## 27 November 2026 — Member 3 requirements and QA work
+
+- The requirements SRS, xUnit backend test project, test plan, test runner and generated test evidence were integrated in local commit `e659b7f`. The commit has not been pushed.
+- The expanded automated suite passed 34/34 cases, including a 1,000-record backend filter/lookup measurement. The local UI exploratory results and their limitations are recorded in [TEST_PLAN.md](../testing/TEST_PLAN.md); they are not stakeholder acceptance.
+- Exploratory UI checks confirmed both demo roles route to their expected screens, submission and reference lookup work, the Agent can filter/reset and update a ticket, and the update is visible to the Customer after restart. The tested complaint was `CMP-2026-0001`; these checks were operator-assisted and no screenshot files were retained.
+- A draft complaint-lifecycle activity diagram and proposed feasibility/schedule/risk register are now available in this folder. Team review and decisions remain pending.
+- Manual malformed-storage recovery, full UI performance measurement, stakeholder acceptance, screenshot/video capture, and final report assembly remain outstanding.
+- **Member 3 sign-off:** OKOYE Chukwuemeka confirmed review and approval of the Phase 2 design on 27 November 2026, and explicitly authorized advancing to Phase 3. This records Member 3's approval only; wider team review, administrator scope decision, and other open requirements remain pending.

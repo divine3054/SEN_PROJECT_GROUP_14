@@ -57,32 +57,32 @@ Theory cases run once per listed input; their test identifiers appear in the gen
 
 Most service/storage cases are integration tests because they combine business logic, serialization and the filesystem. Do not describe them all as isolated unit tests.
 
-## 4. Manual system tests - NOT RUN
+## 4. Local UI execution record - 27 November 2026
 
-Run in a separate demonstration folder using sample accounts/data. For every case record tester, date, input, expected result, actual result, pass/fail and screenshot reference. Do not overwrite real users/complaints to reset a demonstration.
+The following exploratory checks were performed in the local WinForms application using the built-in demo accounts. Operator: Copilot via Computer Use, not an independent human stakeholder. The app ran against its local demonstration data; one sample complaint was created and updated. No screenshot files were saved, so these observations are not a substitute for the team's signed acceptance run. The team should repeat the scenarios on the designated demonstration computer and retain screenshots.
 
-- **MAN-01 / FR-01, NFR-01:** Log in once with each role, then with wrong credentials. Expected: correct screen for each role, masked password, useful failed-login feedback. Actual: NOT RUN. Result: NOT RUN.
-- **MAN-02 / FR-02, FR-04:** Customer submits title Incorrect bill, Billing, description Extra charge. Expected: visible reference and persisted Pending complaint. Earlier wireframe also requests a confirmation popup; verify it separately, since current code only sets a label. Actual: NOT RUN. Result: NOT RUN.
-- **MAN-03 / FR-02:** Submit blank title and blank description separately. Expected: validation feedback with no extra record. Actual: NOT RUN. Result: NOT RUN.
-- **MAN-04 / FR-03, FR-06, FR-07:** Agent filters, resets, selects a ticket and saves Resolved/Service/Fixed. Expected: correct filter/reset results, clear selection, saved update. Verify empty-grid behavior, selection controls and notes layout. Actual: NOT RUN. Result: NOT RUN.
-- **MAN-05 / FR-05:** Track valid, lowercase/padded, unknown and blank references. Expected: correct details for hits, no stale result for misses, alert for blank input. The current blank-input alert is a known gap. Actual: NOT RUN. Result: NOT RUN.
-- **MAN-06 / FR-08:** Close and reopen the app after submission and after an update. Expected: reference and changed status/notes retained. Actual: NOT RUN. Result: NOT RUN.
-- **MAN-07 / NFR-02:** In an isolated data folder, simulate malformed JSON and an unwritable complaints file. Expected target: useful error and no false success. Current startup/save recovery needs developer work. Actual: NOT RUN. Result: NOT RUN.
-- **PERF-01 / NFR-03:** Use 1,000 sample tickets and time search/filter on the demo PC. Expected proposed target: within 2 seconds. Record CPU/RAM and actual measurements. Actual: NOT RUN. Result: NOT RUN.
+- **MAN-01 / FR-01, NFR-01:** Customer `customer1` and Support Agent `agent1` logins opened their respective screens; password characters were masked. A nonmatching password value was rejected with “Invalid username or password.” Actual: observed. Result: **PASS (exploratory UI check)**.
+- **MAN-02 / FR-02, FR-04:** Submitted title “Incorrect bill”, Billing, description “Extra charge”. The form displayed `CMP-2026-0001`; the Agent view showed it as Pending after reload. No separate confirmation popup appeared; only the in-form reference label was shown. Actual: observed. Result: **PARTIAL** (core submission/reference passed; popup expectation not met).
+- **MAN-03 / FR-02:** Submitted with a blank title and then with a blank description. Both attempts displayed “Title and description are required.” The Agent grid still contained only the original sample ticket. The prior successful reference remained visible on the submit tab after the rejected attempts. Actual: observed. Result: **PARTIAL** (validation/no extra ticket passed; stale success label is a UI defect).
+- **MAN-04 / FR-03, FR-06, FR-07:** Filtering for Technical produced an empty grid; Reset restored the Billing ticket. Selecting it populated the edit controls. Saving category Service, status Resolved and notes “Fixed” displayed “Updated CMP-2026-0001.” The grid exposes all complaint properties rather than the six planned columns. Actual: observed. Result: **PARTIAL** (filter/reset/update passed; grid presentation still needs review).
+- **MAN-05 / FR-05:** A lowercase, space-padded valid reference showed the complaint details. An unknown reference replaced the prior result with “No complaint found with that reference number.” Blank input followed the same no-match path and did not display a dedicated blank-input alert. Actual: observed. Result: **PARTIAL** (lookup/no-stale-result passed; blank-input alert missing).
+- **MAN-06 / FR-08:** Closed and reopened the app after submission; the reference was still trackable. After the agent update, closed/reopened again and the Customer view showed Service, Resolved and “Fixed.” Actual: observed. Result: **PASS (exploratory UI check)**.
+- **MAN-07 / NFR-02:** UI startup/save behavior with malformed JSON and an unwritable file was not exercised; doing so safely requires a separately controlled demonstration working directory. Backend STORE05 verifies malformed JSON raises an error and preserves the source file, but does not prove graceful UI recovery. Actual: NOT RUN. Result: **NOT RUN**.
+- **PERF-01 / NFR-03:** The latest `PERF01` run measured category/status filtering of 1,000 records at 1.056 ms and lookup of the last reference at 0.285 ms. Environment reported by the test: Windows `10.0.26200`, .NET `10.0.15`, 8 logical CPUs. These are service-level timings on the current test host, not a full WinForms grid-rendering measurement or confirmed measurement on the designated demonstration PC. Result: **BACKEND MEASUREMENT ONLY**; UI performance acceptance remains pending.
 
-## 5. Acceptance tests - NOT RUN
+## 5. Stakeholder acceptance - NOT RUN
 
-A team reviewer acting as a Customer and another as a Support Agent walk through the four SRS scenarios. Record their names, feedback, acceptance decisions and any remaining defects. This is stakeholder acceptance, separate from xUnit results. No acceptance signature or Phase 2 sign-off has been supplied by preparing these files.
+A team reviewer acting as a Customer and another as a Support Agent must walk through the four SRS scenarios. Record their names, feedback, acceptance decisions and any remaining defects. The exploratory UI checks above are not stakeholder acceptance. Member 3's Phase 2 approval and Phase 3 authorization are recorded separately in [PROJECT_LOG.md](../phase-2/PROJECT_LOG.md); stakeholder acceptance remains pending.
 
 ## 6. Open issues and exit criteria
 
-Known by code inspection, not marked as executed manual-test failures:
+The issues below are separated by the evidence that supports them: code inspection, exploratory UI observations, or outstanding team decisions.
 
 - QA-01 (Member 2/Member 1): failed saves can leave cached changes; corrupt JSON/startup or agent-save errors lack graceful UI handling.
-- QA-02 (Member 1): blank tracking input is not explicitly rejected; submit confirmation popup is absent.
-- QA-03 (Member 1): grid auto-generates all complaint properties rather than the six planned columns; single-selection/disabled-save/multiline-notes behavior needs reconciliation with the wireframe.
+- QA-02 (Member 1): UI check confirmed blank tracking input has no dedicated validation alert and the submit confirmation popup is absent.
+- QA-03 (Member 1): UI check confirmed the grid exposes all complaint properties rather than the six planned columns; single-selection, disabled-save and multiline-notes behavior still needs reconciliation with the wireframe.
 - QA-04 (team): decide whether to retain or defer administrator account management/summary use cases from the earlier design.
-- QA-05 (Member 3/team): activity diagram, feasibility/schedule/risks, screenshots, video and assembled report remain separate deliverables.
+- QA-05 (Member 3/team): draft [activity diagram](../phase-2/ACTIVITY-DIAGRAM.md) and [feasibility/schedule/risk material](../phase-2/FEASIBILITY-SCHEDULE-RISKS.md) are prepared. Human-captured screenshots, video, stakeholder acceptance and assembled report remain outstanding.
 
 Exit criteria: automated cases pass; required manual and acceptance cases have actual results; core defects are fixed/retested or explicitly accepted with limitations; final report links are viewable; team approval is recorded with real names and dates.
 
